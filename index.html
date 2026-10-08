@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Blend — Caffè Suiso</title>
+<meta name="description" content="Sei domande. Cinque origini. Una miscela interamente tua, tostata su ordinazione da Caffè Suiso.">
+<link rel="canonical" href="https://blend.caffesuiso.ch/">
+
+<!-- Icons -->
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Link previews (WhatsApp, e-mail, social) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffè Suiso">
+<meta property="og:url" content="https://blend.caffesuiso.ch/">
+<meta property="og:title" content="Build Your Blend — Caffè Suiso">
+<meta property="og:description" content="Sei domande. Cinque origini. Una miscela interamente tua, tostata su ordinazione da Caffè Suiso.">
+<meta property="og:image" content="https://blend.caffesuiso.ch/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Caffè Suiso — Crea il tuo blend personale: Brasile, Colombia, India, India Robusta, Decaf.">
+<meta property="og:locale" content="it_CH">
+<meta property="og:locale:alternate" content="fr_CH">
+<meta property="og:locale:alternate" content="de_CH">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build Your Blend — Caffè Suiso">
+<meta name="twitter:description" content="Sei domande. Cinque origini. Una miscela interamente tua, tostata su ordinazione da Caffè Suiso.">
+<meta name="twitter:image" content="https://blend.caffesuiso.ch/og-image.png">
+<meta name="twitter:image:alt" content="Caffè Suiso — Crea il tuo blend personale: Brasile, Colombia, India, India Robusta, Decaf.">
+
+<!-- Fonts: Cormorant Garamond & Jost, self-hosted -->
+<link rel="preload" href="fonts/cormorant-garamond-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jost-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root {
+    --espresso: #1C0F0A;
+    --roast: #4A2B1E;
+    --crema: #C9954A;
+    --milk: #F5EDD8;
+    --steam: #F7F2EA;
+    --fog: #EDE5D5;
+    --muted: #8A7060;
+    --border: #DDD0BC;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--steam);
+    color: var(--espresso);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── LAYOUT ── */
+  .app {
+    max-width: 520px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+  }
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── INTRO ── */
+  #intro {
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #intro.active { display: flex; }
+
+  .brand {
+    display: flex; align-items: center; gap: 9px;
+    margin-bottom: 3rem;
+  }
+  .bean-svg { width: 22px; height: 22px; }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 300;
+    letter-spacing: 3.5px; text-transform: uppercase;
+    color: var(--roast);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 10vw, 64px);
+    font-weight: 300; line-height: 1.0;
+    color: var(--espresso);
+    margin-bottom: 1rem;
+  }
+  .hero-title em { font-style: italic; color: var(--crema); }
+  .hero-line {
+    width: 36px; height: 1px; background: var(--crema);
+    margin: 0 auto 1.25rem;
+  }
+  .hero-sub {
+    font-size: 13px; font-weight: 300; letter-spacing: 0.5px;
+    color: var(--muted); line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .origin-pills {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 7px;
+    margin-bottom: 2.5rem;
+  }
+  .pill {
+    padding: 5px 13px; border-radius: 20px;
+    font-size: 11px; font-weight: 400; letter-spacing: 1px;
+    text-transform: uppercase; border: 1px solid;
+  }
+  .pill-br { border-color: #B87333; color: #7A4A1E; background: #FDF5E8; }
+  .pill-co { border-color: #5A8A50; color: #2D5225; background: #F0F7EF; }
+  .pill-in { border-color: #C06040; color: #7A3020; background: #FDF0EB; }
+  .pill-inr { border-color: #A03030; color: #6A1515; background: #FDF0F0; }
+  .pill-dec { border-color: #6080A0; color: #304060; background: #EEF3F8; }
+
+  .lang-bar {
+    display: flex; justify-content: center; gap: 5px;
+    margin-bottom: 2.5rem;
+  }
+  .lang-btn {
+    padding: 5px 13px; border-radius: 3px;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; font-weight: 400; letter-spacing: 1px;
+    color: var(--muted); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--espresso); color: var(--milk);
+    border-color: var(--espresso);
+  }
+  .btn-cta {
+    display: inline-block;
+    padding: 14px 44px;
+    background: var(--espresso); color: var(--milk);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    border: none; cursor: pointer; border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-cta:hover { background: var(--roast); transform: translateY(-1px); }
+  .btn-cta:active { transform: translateY(0); }
+
+  /* ── QUIZ ── */
+  #quiz {
+    padding: 0;
+    min-height: 100vh;
+  }
+  .quiz-topbar {
+    display: flex; align-items: center;
+    padding: 1.25rem 1.5rem 1rem;
+    gap: 14px;
+  }
+  .back-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); background: none; border: none;
+    cursor: pointer; transition: color 0.15s; padding: 0;
+  }
+  .back-btn:hover { color: var(--roast); }
+  .progress-rail {
+    flex: 1; height: 1.5px; background: var(--border);
+    border-radius: 1px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; background: var(--crema);
+    border-radius: 1px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .step-label {
+    font-size: 11px; letter-spacing: 1px;
+    color: var(--muted); min-width: 32px; text-align: right;
+  }
+
+  .question-wrap {
+    padding: 0.5rem 1.5rem 2rem;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .q-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--crema); margin-bottom: 0.4rem;
+  }
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 6vw, 34px);
+    font-weight: 400; line-height: 1.15;
+    color: var(--espresso); margin-bottom: 0.4rem;
+  }
+  .q-hint {
+    font-size: 12px; font-weight: 300;
+    color: var(--muted); margin-bottom: 1.75rem;
+  }
+
+  /* option cards */
+  .options {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+  .opt-card {
+    padding: 1rem 0.9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    text-align: left;
+  }
+  .opt-card:hover { border-color: var(--crema); }
+  .opt-card.sel {
+    border-color: var(--espresso);
+    background: var(--espresso);
+  }
+  .opt-card.sel .opt-label { color: var(--milk); }
+  .opt-card.sel .opt-desc { color: rgba(245,237,216,0.65); }
+  .opt-icon { font-size: 20px; margin-bottom: 6px; display: block; line-height: 1; }
+  .opt-label {
+    font-size: 13px; font-weight: 500;
+    color: var(--espresso); margin-bottom: 3px;
+    line-height: 1.3;
+  }
+  .opt-desc {
+    font-size: 11px; font-weight: 300;
+    color: var(--muted); line-height: 1.4;
+  }
+  /* full-width single option */
+  .opt-card.full { grid-column: 1 / -1; }
+
+  /* ── NAME SCREEN ── */
+  #naming {
+    padding: 2rem 1.5rem 3rem;
+    min-height: 100vh;
+  }
+  .name-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; font-weight: 300;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 2rem;
+  }
+  .name-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 7vw, 42px);
+    font-weight: 300; color: var(--espresso);
+    line-height: 1.1; margin-bottom: 0.5rem;
+  }
+  .name-sub {
+    font-size: 13px; font-weight: 300;
+    color: var(--muted); margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .name-input {
+    width: 100%;
+    padding: 15px 16px;
+    border: 2px solid var(--border);
+    border-radius: 3px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    color: var(--espresso);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 0.5rem;
+  }
+  .name-input:focus { border-color: var(--crema); }
+  .name-input::placeholder { color: #C8BAA8; }
+  .name-counter {
+    font-size: 11px; color: var(--muted);
+    text-align: right; margin-bottom: 2rem;
+  }
+
+  .weight-label {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .weight-row { display: flex; gap: 8px; margin-bottom: 2rem; }
+  .w-btn {
+    flex: 1; padding: 12px 8px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px; background: white;
+    cursor: pointer; font-family: 'Jost', sans-serif;
+    transition: all 0.15s; text-align: center;
+  }
+  .w-btn:hover { border-color: var(--crema); }
+  .w-btn.sel { border-color: var(--espresso); background: var(--espresso); }
+  .w-btn.sel .w-size { color: var(--milk); }
+  .w-btn.sel .w-hint { color: rgba(245,237,216,0.6); }
+  .w-size { font-size: 15px; font-weight: 500; color: var(--espresso); display: block; margin-bottom: 2px; }
+  .w-hint { font-size: 11px; color: var(--muted); }
+
+  /* ── RESULT ── */
+  #result {
+    padding: 2rem 1.5rem 3rem;
+    min-height: 100vh;
+  }
+  .result-top { text-align: center; margin-bottom: 2rem; }
+  .result-eyebrow {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
+  }
+  .result-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 9vw, 56px);
+    font-weight: 300; font-style: italic;
+    color: var(--espresso); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .result-tag {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .result-ref {
+    font-size: 11px; letter-spacing: 1px;
+    color: var(--muted); margin-bottom: 0.5rem;
+  }
+
+  .result-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1rem;
+  }
+
+  /* blend bars */
+  .bar-row { margin-bottom: 12px; }
+  .bar-row:last-child { margin-bottom: 0; }
+  .bar-meta {
+    display: flex; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .bar-name { font-size: 13px; color: var(--espresso); }
+  .bar-pct { font-size: 13px; color: var(--muted); }
+  .bar-track {
+    height: 5px; background: var(--fog);
+    border-radius: 3px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 3px; width: 0;
+    transition: width 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .fill-br  { background: #B87333; }
+  .fill-co  { background: #5A8A50; }
+  .fill-in  { background: #C06040; }
+  .fill-inr { background: #A03030; }
+  .fill-dec { background: #6080A0; }
+
+  /* flavour tags */
+  .flavour-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .ftag {
+    padding: 5px 12px; border-radius: 20px;
+    background: var(--steam); border: 1px solid var(--border);
+    font-size: 12px; color: var(--roast); font-weight: 300;
+  }
+
+  /* roast indicator */
+  .roast-wrap { margin-top: 1.25rem; }
+  .roast-meta {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--muted); margin-bottom: 5px;
+  }
+  .roast-track {
+    height: 7px; border-radius: 4px;
+    background: linear-gradient(to right, #F5DEB3, #C4813A, #5C3D2E, #1C0F0A);
+    position: relative; margin-bottom: 5px;
+  }
+  .roast-thumb {
+    position: absolute; top: 50%; width: 13px; height: 13px;
+    border-radius: 50%; background: white;
+    border: 2.5px solid var(--espresso);
+    transform: translate(-50%, -50%);
+    transition: left 0.7s ease;
+  }
+  .roast-ends {
+    display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--muted); letter-spacing: 0.5px;
+  }
+
+  /* gift row */
+  .gift-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 14px;
+    border: 1px dashed var(--border);
+    border-radius: 6px; background: white;
+    margin-bottom: 10px; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .gift-row:hover { border-color: var(--crema); }
+  .gift-row.gift-on {
+    border-style: solid; border-color: var(--crema);
+    background: var(--milk);
+  }
+  .gift-icon-wrap {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--fog); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .gift-text { font-size: 13px; color: var(--roast); }
+  .gift-sub { font-size: 11px; color: var(--muted); font-weight: 300; margin-top: 1px; }
+
+  .cta-row { display: flex; gap: 8px; margin-top: 1.25rem; }
+  .btn-order {
+    flex: 2; padding: 14px;
+    background: var(--espresso); color: var(--milk);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: none; cursor: pointer; border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .btn-order:hover { background: var(--roast); }
+  .btn-share {
+    flex: 1; padding: 13px;
+    background: transparent; color: var(--roast);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: 1px solid var(--roast); cursor: pointer; border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-share:hover { background: var(--roast); color: var(--milk); }
+
+  .restart {
+    text-align: center; margin-top: 1.75rem;
+    font-size: 12px; color: var(--muted);
+    cursor: pointer; text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .restart:hover { color: var(--roast); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 380px) {
+    .options { grid-template-columns: 1fr; }
+    .opt-card.full { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══════════════ INTRO ═══════════════ -->
+  <div id="intro" class="screen active">
+    <div class="brand">
+      <svg class="bean-svg" viewBox="0 0 22 22" fill="none">
+        <ellipse cx="11" cy="11" rx="8" ry="10.5" fill="#4A2B1E" opacity="0.12"/>
+        <ellipse cx="11" cy="11" rx="6" ry="8.5" fill="#4A2B1E" opacity="0.15"/>
+        <path d="M11 3.5 Q14.5 11 11 18.5" stroke="#4A2B1E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">Caffè Suiso</span>
+    </div>
+
+    <h1 class="hero-title">Crea il tuo<br><em>blend</em><br>personale.</h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub" id="intro-sub">Sei domande. Cinque origini.<br>Una miscela interamente tua.</p>
+
+    <div class="origin-pills">
+      <span class="pill pill-br">Brasile</span>
+      <span class="pill pill-co">Colombia</span>
+      <span class="pill pill-in">India</span>
+      <span class="pill pill-inr">India Robusta</span>
+      <span class="pill pill-dec">Decaf</span>
+    </div>
+
+    <div class="lang-bar">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+
+    <button class="btn-cta" id="intro-btn" onclick="startQuiz()">Inizia →</button>
+  </div>
+
+  <!-- ═══════════════ QUIZ ═══════════════ -->
+  <div id="quiz" class="screen">
+    <div class="quiz-topbar">
+      <button class="back-btn" id="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="progress-rail"><div class="progress-bar" id="prog-bar"></div></div>
+      <span class="step-label" id="step-lbl">1 / 6</span>
+    </div>
+    <div class="question-wrap" id="q-area"></div>
+  </div>
+
+  <!-- ═══════════════ NAMING ═══════════════ -->
+  <div id="naming" class="screen">
+    <p class="name-brand">Caffè Suiso</p>
+    <h2 class="name-title" id="name-title">Dai un nome<br>alla tua miscela.</h2>
+    <p class="name-sub" id="name-sub">Questa miscela è tua. Dagli un nome che significhi qualcosa.</p>
+
+    <input type="text" class="name-input" id="name-input"
+      placeholder="es. Alba di novembre, Ricordo di nonna…"
+      maxlength="40"
+      oninput="updateCounter()">
+    <div class="name-counter"><span id="name-count">0</span> / 40</div>
+
+    <p class="weight-label" id="weight-lbl">Scegli la quantità</p>
+    <div class="weight-row">
+      <button class="w-btn" onclick="pickWeight('250g',this)">
+        <span class="w-size">250g</span>
+        <span class="w-hint" id="wh0">Assaggio</span>
+      </button>
+      <button class="w-btn sel" onclick="pickWeight('500g',this)">
+        <span class="w-size">500g</span>
+        <span class="w-hint" id="wh1">Classico</span>
+      </button>
+      <button class="w-btn" onclick="pickWeight('1kg',this)">
+        <span class="w-size">1 kg</span>
+        <span class="w-hint" id="wh2">Appassionato</span>
+      </button>
+    </div>
+
+    <button class="btn-cta" style="width:100%" id="reveal-btn" onclick="buildResult()">Scopri il tuo blend →</button>
+  </div>
+
+  <!-- ═══════════════ RESULT ═══════════════ -->
+  <div id="result" class="screen">
+    <div class="result-top">
+      <div class="result-eyebrow" id="r-eyebrow">Una miscela personale di</div>
+      <div class="result-name" id="r-name">—</div>
+      <div class="result-ref" id="r-ref"></div>
+      <div class="result-tag" id="r-tag">Tostato su ordinazione · Caffè Suiso</div>
+    </div>
+
+    <div class="result-card">
+      <div class="card-title" id="r-comp-label">Composizione</div>
+      <div id="blend-bars"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="card-title" id="r-profile-label">Profilo aromatico</div>
+      <div class="flavour-tags" id="ftags"></div>
+      <div class="roast-wrap">
+        <div class="roast-meta">
+          <span id="r-roast-label">Tostatura</span>
+          <span id="r-roast-name"></span>
+        </div>
+        <div class="roast-track">
+          <div class="roast-thumb" id="roast-thumb"></div>
+        </div>
+        <div class="roast-ends">
+          <span id="rl0">Chiara</span><span id="rl1">Media</span><span id="rl2">Scura</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gift-row" id="gift-row" onclick="toggleGift()">
+      <div class="gift-icon-wrap">◇</div>
+      <div>
+        <div class="gift-text" id="r-gift">Offri questo blend in regalo</div>
+        <div class="gift-sub" id="r-gift-sub">Invialo a qualcuno di speciale, tostato fresco.</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <button class="btn-order" id="r-order" onclick="orderBlend()">Aggiungi al carrello</button>
+      <button class="btn-share" id="r-share" onclick="shareBlend()">Condividi</button>
+    </div>
+    <div class="restart" id="r-restart" onclick="restart()">Ricominciare</div>
+  </div>
+
+</div><!-- .app -->
+
+<script>
+// ══════════════════════════════════════════
+// TRANSLATIONS
+// ══════════════════════════════════════════
+const LANGS = {
+  it: {
+    introSub: 'Sei domande. Cinque origini.\nUna miscela interamente tua.',
+    introBtn: 'Inizia →',
+    back: '← Indietro',
+    questions: [
+      {
+        label: 'Domanda 1', text: 'Come estrai il tuo caffè?', hint: 'Il tuo metodo principale',
+        opts: [
+          { icon: '☕', l: 'Espresso', d: 'Estratto corto, macchina da bar', v: 'espresso' },
+          { icon: '🫖', l: 'Moka', d: 'Caffettiera classica sul fuoco', v: 'moka' },
+          { icon: '🤖', l: 'Automatica', d: 'Macchina con macinacaffè integrato', v: 'auto' },
+          { icon: '🖤', l: 'Filtro / V60', d: 'Estrazione lenta, tazza lunga', v: 'filter' },
+          { icon: '🫙', l: 'French Press', d: 'Immersione con stantuffo', v: 'french' },
+          { icon: '🧊', l: 'Cold Brew', d: 'Estrazione a freddo, 12–24h', v: 'cold' },
+        ]
+      },
+      {
+        label: 'Domanda 2', text: 'Che intensità cerchi nella tazza?', hint: 'Corpo e carattere',
+        opts: [
+          { icon: '🌊', l: 'Delicato', d: 'Leggero, gentile al palato', v: 'light' },
+          { icon: '⚖️', l: 'Equilibrato', d: 'Nessun eccesso, armonia', v: 'balanced' },
+          { icon: '🔥', l: 'Corposo', d: 'Presenza decisa, pieno', v: 'bold' },
+          { icon: '⚡', l: 'Molto forte', d: 'Massima potenza, voglio sentirlo', v: 'intense' },
+        ]
+      },
+      {
+        label: 'Domanda 3', text: 'Sei sensibile alla caffeina?', hint: 'Per calibrare il contenuto',
+        opts: [
+          { icon: '💪', l: 'No, più caffè', d: 'Caffeina piena, nessun problema', v: 'no' },
+          { icon: '🤔', l: 'Un poco', d: 'Preferisco moderarla', v: 'some' },
+          { icon: '🌙', l: 'Sì, la evito', d: 'Voglio meno caffeina possibile', v: 'yes' },
+        ]
+      },
+      {
+        label: 'Domanda 4', text: 'Cosa preferisci nel profilo aromatico?', hint: 'Il tuo gusto',
+        opts: [
+          { icon: '🍫', l: 'Cioccolato e nocciola', d: 'Caldo, rotondo, dolce', v: 'choc' },
+          { icon: '🍋', l: 'Fruttato e floreale', d: 'Vivace, leggero, aromatico', v: 'fruit' },
+          { icon: '🌿', l: 'Tabacco e tostato', d: 'Intenso, terroso, profondo', v: 'tobacco' },
+          { icon: '🤷', l: 'Non so', d: 'Lascio scegliere all\'algoritmo', v: 'neutral' },
+        ]
+      },
+      {
+        label: 'Domanda 5', text: 'Come percepisci l\'acidità?', hint: 'La tua tolleranza',
+        opts: [
+          { icon: '✨', l: 'La adoro', d: 'Vivacità e brillantezza', v: 'love' },
+          { icon: '😐', l: 'Neutra', d: 'Non mi disturba', v: 'neutral' },
+          { icon: '😣', l: 'La detesto', d: 'Voglio dolcezza, zero acidità', v: 'hate' },
+        ]
+      },
+      {
+        label: 'Domanda 6', text: 'Come lo bevi di solito?', hint: 'La tua abitudine quotidiana',
+        opts: [
+          { icon: '⬛', l: 'Nero, puro', d: 'Caffè senza aggiunte', v: 'black' },
+          { icon: '🥛', l: 'Con latte', d: 'Latte, bevanda vegetale, cappuccino', v: 'milk' },
+          { icon: '🔄', l: 'Dipende', d: 'A volte uno, a volte l\'altro', v: 'both' },
+        ]
+      }
+    ],
+    nameTitle: 'Dai un nome\nalla tua miscela.',
+    nameSub: 'Questa miscela è tua. Dagli un nome che significhi qualcosa.',
+    namePlaceholder: 'es. Alba di novembre, Ricordo di nonna…',
+    weightLabel: 'Scegli la quantità',
+    weightHints: ['Assaggio', 'Classico', 'Appassionato'],
+    revealBtn: 'Scopri il tuo blend →',
+    rEyebrow: 'Una miscela personale di',
+    rTag: 'Tostato su ordinazione · Caffè Suiso',
+    rComp: 'Composizione',
+    rProfile: 'Profilo aromatico',
+    rRoast: 'Tostatura',
+    roastLevels: ['Chiara', 'Medio-chiara', 'Media', 'Medio-scura', 'Scura'],
+    roastEnds: ['Chiara', 'Media', 'Scura'],
+    rGift: 'Offri questo blend in regalo',
+    rGiftSub: 'Invialo a qualcuno di speciale, tostato fresco.',
+    rOrder: 'Aggiungi al carrello',
+    rShare: 'Condividi',
+    rRestart: 'Ricominciare',
+    origins: { br: 'Brasile Arabica', co: 'Colombia Arabica', ind: 'India Arabica', inr: 'India Robusta', dec: 'Brasile Decaf' }
+  },
+  en: {
+    introSub: 'Six questions. Five origins.\nOne blend entirely yours.',
+    introBtn: 'Begin →',
+    back: '← Back',
+    questions: [
+      {
+        label: 'Question 1', text: 'How do you brew your coffee?', hint: 'Your main method',
+        opts: [
+          { icon: '☕', l: 'Espresso', d: 'Short shot, espresso machine', v: 'espresso' },
+          { icon: '🫖', l: 'Moka pot', d: 'Classic stovetop brewer', v: 'moka' },
+          { icon: '🤖', l: 'Automatic', d: 'Bean-to-cup machine', v: 'auto' },
+          { icon: '🖤', l: 'Filter / V60', d: 'Slow brew, long cup', v: 'filter' },
+          { icon: '🫙', l: 'French Press', d: 'Full immersion method', v: 'french' },
+          { icon: '🧊', l: 'Cold Brew', d: 'Cold extraction, 12–24h', v: 'cold' },
+        ]
+      },
+      {
+        label: 'Question 2', text: 'What intensity do you seek?', hint: 'Body and character',
+        opts: [
+          { icon: '🌊', l: 'Delicate', d: 'Light, gentle on the palate', v: 'light' },
+          { icon: '⚖️', l: 'Balanced', d: 'No extremes, harmony', v: 'balanced' },
+          { icon: '🔥', l: 'Bold', d: 'Full-bodied, assertive', v: 'bold' },
+          { icon: '⚡', l: 'Very strong', d: 'Maximum punch', v: 'intense' },
+        ]
+      },
+      {
+        label: 'Question 3', text: 'Are you sensitive to caffeine?', hint: 'To calibrate content',
+        opts: [
+          { icon: '💪', l: 'Not at all', d: 'Full caffeine, no problem', v: 'no' },
+          { icon: '🤔', l: 'A little', d: 'I prefer to moderate it', v: 'some' },
+          { icon: '🌙', l: 'Yes, I avoid it', d: 'I want as little as possible', v: 'yes' },
+        ]
+      },
+      {
+        label: 'Question 4', text: 'What aroma profile do you prefer?', hint: 'Your taste',
+        opts: [
+          { icon: '🍫', l: 'Chocolate & hazelnut', d: 'Warm, round, sweet', v: 'choc' },
+          { icon: '🍋', l: 'Fruity & floral', d: 'Bright, light, aromatic', v: 'fruit' },
+          { icon: '🌿', l: 'Tobacco & roasted', d: 'Intense, earthy, deep', v: 'tobacco' },
+          { icon: '🤷', l: 'Not sure', d: 'Let the algorithm decide', v: 'neutral' },
+        ]
+      },
+      {
+        label: 'Question 5', text: 'How do you perceive acidity?', hint: 'Your tolerance',
+        opts: [
+          { icon: '✨', l: 'I love it', d: 'Vibrancy and brightness', v: 'love' },
+          { icon: '😐', l: 'Neutral', d: "It doesn't bother me", v: 'neutral' },
+          { icon: '😣', l: 'I hate it', d: 'Sweetness only, zero acidity', v: 'hate' },
+        ]
+      },
+      {
+        label: 'Question 6', text: 'How do you usually drink it?', hint: 'Your daily habit',
+        opts: [
+          { icon: '⬛', l: 'Black, pure', d: 'Coffee with nothing added', v: 'black' },
+          { icon: '🥛', l: 'With milk', d: 'Milk, plant-based, cappuccino', v: 'milk' },
+          { icon: '🔄', l: 'It varies', d: 'Sometimes one, sometimes both', v: 'both' },
+        ]
+      }
+    ],
+    nameTitle: 'Name\nyour blend.',
+    nameSub: 'This blend is yours. Give it a name that means something.',
+    namePlaceholder: 'e.g. Morning Light, Nonna\'s Cup…',
+    weightLabel: 'Choose your quantity',
+    weightHints: ['Taster', 'Classic', 'Devotee'],
+    revealBtn: 'Reveal my blend →',
+    rEyebrow: 'A personal blend by',
+    rTag: 'Roasted to order · Caffè Suiso',
+    rComp: 'Composition',
+    rProfile: 'Flavour profile',
+    rRoast: 'Roast level',
+    roastLevels: ['Light', 'Light-medium', 'Medium', 'Medium-dark', 'Dark'],
+    roastEnds: ['Light', 'Medium', 'Dark'],
+    rGift: 'Give this blend as a gift',
+    rGiftSub: 'Send it to someone special, roasted fresh.',
+    rOrder: 'Add to cart',
+    rShare: 'Share blend',
+    rRestart: 'Start over',
+    origins: { br: 'Brazil Arabica', co: 'Colombia Arabica', ind: 'India Arabica', inr: 'India Robusta', dec: 'Brazil Decaf' }
+  },
+  fr: {
+    introSub: 'Six questions. Cinq origines.\nUn blend entièrement à vous.',
+    introBtn: 'Commencer →',
+    back: '← Retour',
+    questions: [
+      {
+        label: 'Question 1', text: 'Comment préparez-vous votre café ?', hint: 'Votre méthode principale',
+        opts: [
+          { icon: '☕', l: 'Espresso', d: 'Machine à expresso, café court', v: 'espresso' },
+          { icon: '🫖', l: 'Moka', d: 'Cafetière italienne sur le feu', v: 'moka' },
+          { icon: '🤖', l: 'Automatique', d: 'Machine avec moulin intégré', v: 'auto' },
+          { icon: '🖤', l: 'Filtre / V60', d: 'Extraction lente, tasse longue', v: 'filter' },
+          { icon: '🫙', l: 'French Press', d: 'Immersion avec piston', v: 'french' },
+          { icon: '🧊', l: 'Cold Brew', d: 'Extraction à froid, 12–24h', v: 'cold' },
+        ]
+      },
+      {
+        label: 'Question 2', text: 'Quelle intensité recherchez-vous ?', hint: 'Corps et caractère',
+        opts: [
+          { icon: '🌊', l: 'Délicat', d: 'Léger, doux en bouche', v: 'light' },
+          { icon: '⚖️', l: 'Équilibré', d: 'Harmonie, sans excès', v: 'balanced' },
+          { icon: '🔥', l: 'Corsé', d: 'Présence affirmée', v: 'bold' },
+          { icon: '⚡', l: 'Très fort', d: 'Puissance maximale', v: 'intense' },
+        ]
+      },
+      {
+        label: 'Question 3', text: 'Êtes-vous sensible à la caféine ?', hint: 'Pour calibrer la teneur',
+        opts: [
+          { icon: '💪', l: 'Pas du tout', d: 'Caféine pleine, aucun problème', v: 'no' },
+          { icon: '🤔', l: 'Un peu', d: 'Je préfère la modérer', v: 'some' },
+          { icon: '🌙', l: 'Oui, je l\'évite', d: 'Le moins possible', v: 'yes' },
+        ]
+      },
+      {
+        label: 'Question 4', text: 'Quel profil aromatique préférez-vous ?', hint: 'Votre goût',
+        opts: [
+          { icon: '🍫', l: 'Chocolat et noisette', d: 'Chaud, rond, doux', v: 'choc' },
+          { icon: '🍋', l: 'Fruité et floral', d: 'Vif, léger, aromatique', v: 'fruit' },
+          { icon: '🌿', l: 'Tabac et torréfié', d: 'Intense, terreux, profond', v: 'tobacco' },
+          { icon: '🤷', l: 'Je ne sais pas', d: "Laissez l'algorithme choisir", v: 'neutral' },
+        ]
+      },
+      {
+        label: 'Question 5', text: 'Comment percevez-vous l\'acidité ?', hint: 'Votre tolérance',
+        opts: [
+          { icon: '✨', l: 'Je l\'adore', d: 'Vivacité et brillance', v: 'love' },
+          { icon: '😐', l: 'Neutre', d: 'Elle ne me dérange pas', v: 'neutral' },
+          { icon: '😣', l: 'Je la déteste', d: 'Douceur uniquement, zéro acidité', v: 'hate' },
+        ]
+      },
+      {
+        label: 'Question 6', text: 'Comment le buvez-vous habituellement ?', hint: 'Votre habitude',
+        opts: [
+          { icon: '⬛', l: 'Noir, pur', d: 'Sans rien ajouter', v: 'black' },
+          { icon: '🥛', l: 'Avec du lait', d: 'Lait, végétal, cappuccino', v: 'milk' },
+          { icon: '🔄', l: 'Ça dépend', d: "Tantôt l'un, tantôt l'autre", v: 'both' },
+        ]
+      }
+    ],
+    nameTitle: 'Nommez\nvotre blend.',
+    nameSub: 'Ce blend est le vôtre. Donnez-lui un nom qui a du sens.',
+    namePlaceholder: 'ex. Aube de novembre, Tasse de mémé…',
+    weightLabel: 'Choisissez votre quantité',
+    weightHints: ['Découverte', 'Classique', 'Amateur'],
+    revealBtn: 'Révéler mon blend →',
+    rEyebrow: 'Un blend personnel de',
+    rTag: 'Torréfié à la commande · Caffè Suiso',
+    rComp: 'Composition',
+    rProfile: 'Profil aromatique',
+    rRoast: 'Torréfaction',
+    roastLevels: ['Clair', 'Clair-moyen', 'Moyen', 'Moyen-foncé', 'Foncé'],
+    roastEnds: ['Clair', 'Moyen', 'Foncé'],
+    rGift: 'Offrir ce blend en cadeau',
+    rGiftSub: 'Envoyez-le à quelqu\'un de spécial, torréfié frais.',
+    rOrder: 'Ajouter au panier',
+    rShare: 'Partager',
+    rRestart: 'Recommencer',
+    origins: { br: 'Brésil Arabica', co: 'Colombie Arabica', ind: 'Inde Arabica', inr: 'Inde Robusta', dec: 'Brésil Décaf' }
+  },
+  de: {
+    introSub: 'Sechs Fragen. Fünf Ursprünge.\nEin Blend, der ganz dir gehört.',
+    introBtn: 'Beginnen →',
+    back: '← Zurück',
+    questions: [
+      {
+        label: 'Frage 1', text: 'Wie brühst du deinen Kaffee?', hint: 'Deine Hauptmethode',
+        opts: [
+          { icon: '☕', l: 'Espresso', d: 'Kurzer Bezug, Espressomaschine', v: 'espresso' },
+          { icon: '🫖', l: 'Moka', d: 'Klassische Herdkanne', v: 'moka' },
+          { icon: '🤖', l: 'Vollautomat', d: 'Maschine mit Mahlwerk', v: 'auto' },
+          { icon: '🖤', l: 'Filter / V60', d: 'Langsame Extraktion, lange Tasse', v: 'filter' },
+          { icon: '🫙', l: 'French Press', d: 'Tauchbrühen mit Stempel', v: 'french' },
+          { icon: '🧊', l: 'Cold Brew', d: 'Kaltextraktion, 12–24 Std.', v: 'cold' },
+        ]
+      },
+      {
+        label: 'Frage 2', text: 'Welche Intensität suchst du?', hint: 'Körper und Charakter',
+        opts: [
+          { icon: '🌊', l: 'Sanft', d: 'Leicht, zart am Gaumen', v: 'light' },
+          { icon: '⚖️', l: 'Ausgewogen', d: 'Keine Extreme, Harmonie', v: 'balanced' },
+          { icon: '🔥', l: 'Kräftig', d: 'Vollmundig, bestimmt', v: 'bold' },
+          { icon: '⚡', l: 'Sehr stark', d: 'Maximale Kraft', v: 'intense' },
+        ]
+      },
+      {
+        label: 'Frage 3', text: 'Reagierst du empfindlich auf Koffein?', hint: 'Zur Kalibrierung',
+        opts: [
+          { icon: '💪', l: 'Gar nicht', d: 'Volles Koffein, kein Problem', v: 'no' },
+          { icon: '🤔', l: 'Ein wenig', d: 'Ich bevorzuge es zu mäßigen', v: 'some' },
+          { icon: '🌙', l: 'Ja, ich meide es', d: 'So wenig wie möglich', v: 'yes' },
+        ]
+      },
+      {
+        label: 'Frage 4', text: 'Welches Aromaprofil bevorzugst du?', hint: 'Dein Geschmack',
+        opts: [
+          { icon: '🍫', l: 'Schokolade & Haselnuss', d: 'Warm, rund, süß', v: 'choc' },
+          { icon: '🍋', l: 'Fruchtig & blumig', d: 'Lebendig, leicht, aromatisch', v: 'fruit' },
+          { icon: '🌿', l: 'Tabak & geröstet', d: 'Intensiv, erdig, tief', v: 'tobacco' },
+          { icon: '🤷', l: 'Unsicher', d: 'Den Algorithmus entscheiden lassen', v: 'neutral' },
+        ]
+      },
+      {
+        label: 'Frage 5', text: 'Wie nimmst du Säure wahr?', hint: 'Deine Toleranz',
+        opts: [
+          { icon: '✨', l: 'Ich liebe sie', d: 'Lebendigkeit und Helligkeit', v: 'love' },
+          { icon: '😐', l: 'Neutral', d: 'Stört mich nicht', v: 'neutral' },
+          { icon: '😣', l: 'Ich hasse sie', d: 'Nur Süße, keine Säure', v: 'hate' },
+        ]
+      },
+      {
+        label: 'Frage 6', text: 'Wie trinkst du ihn normalerweise?', hint: 'Deine tägliche Gewohnheit',
+        opts: [
+          { icon: '⬛', l: 'Schwarz, pur', d: 'Ohne alles', v: 'black' },
+          { icon: '🥛', l: 'Mit Milch', d: 'Milch, pflanzlich, Cappuccino', v: 'milk' },
+          { icon: '🔄', l: 'Wechselnd', d: 'Mal so, mal so', v: 'both' },
+        ]
+      }
+    ],
+    nameTitle: 'Benenne\ndeinen Blend.',
+    nameSub: 'Das ist dein Blend. Gib ihm einen Namen, der etwas bedeutet.',
+    namePlaceholder: 'z.B. Novemberdämmerung, Omas Tasse…',
+    weightLabel: 'Menge wählen',
+    weightHints: ['Kostprobe', 'Klassisch', 'Liebhaber'],
+    revealBtn: 'Meinen Blend enthüllen →',
+    rEyebrow: 'Ein persönlicher Blend von',
+    rTag: 'Frisch geröstet auf Bestellung · Caffè Suiso',
+    rComp: 'Zusammensetzung',
+    rProfile: 'Aromaprofil',
+    rRoast: 'Röstgrad',
+    roastLevels: ['Hell', 'Hell-mittel', 'Mittel', 'Mittel-dunkel', 'Dunkel'],
+    roastEnds: ['Hell', 'Mittel', 'Dunkel'],
+    rGift: 'Diesen Blend verschenken',
+    rGiftSub: 'Frisch geröstet an jemanden Besonderen senden.',
+    rOrder: 'In den Warenkorb',
+    rShare: 'Blend teilen',
+    rRestart: 'Neu beginnen',
+    origins: { br: 'Brasilien Arabica', co: 'Kolumbien Arabica', ind: 'Indien Arabica', inr: 'Indien Robusta', dec: 'Brasilien Decaf' }
+  }
+};
+
+// ══════════════════════════════════════════
+// ALGORITHM
+// Groups: A = espresso/moka/auto, B = filter/french, C = cold
+// Returns { br, co, ind, inr, dec } summing to 100
+// ══════════════════════════════════════════
+function calcBlend(ans) {
+  const method = ans[0]; // espresso moka auto filter french cold
+  const intensity = ans[1]; // light balanced bold intense
+  const caffeine = ans[2]; // no some yes
+  const aroma = ans[3]; // choc fruit tobacco neutral
+  const acidity = ans[4]; // love neutral hate
+  const milk = ans[5]; // black milk both
+
+  let br = 0, co = 0, ind = 0, inr = 0, dec = 0;
+
+  // ── GROUP A ──
+  if (['espresso','moka','auto'].includes(method)) {
+    // Base
+    br = 35; co = 25; ind = 40;
+
+    // Intensity
+    if (intensity === 'light')    { ind = 40; br = 40; co = 20; }
+    if (intensity === 'bold')     { ind = 55; br = 30; co = 15; }
+    if (intensity === 'intense')  { ind = 50; br = 25; co = 15; inr = 10; }
+
+    // Aroma (Q4) — adjust within Group A caps
+    if (aroma === 'choc') {
+      br = Math.min(br + 10, 50); co = Math.max(co - 10, 5);
+    }
+    if (aroma === 'fruit') {
+      co = Math.min(co + 5, 30); br = Math.max(br - 5, 15);
+    }
+    if (aroma === 'tobacco') {
+      ind = Math.min(ind + 10, 70); br = Math.max(br - 5, 10); co = Math.max(co - 5, 5);
+      if (intensity === 'intense') inr = Math.min(inr + 5, 20);
+    }
+
+    // Acidity (Q5)
+    if (acidity === 'hate') {
+      ind = Math.min(ind + 10, 70); co = Math.max(co - 10, 5);
+    }
+    if (acidity === 'love') {
+      co = Math.min(co + 5, 30); ind = Math.max(ind - 5, 40);
+    }
+
+    // Milk (Q6)
+    if (milk === 'milk') {
+      ind = Math.min(ind + 5, 70); co = Math.max(co - 5, 5);
+    }
+
+    // Robusta cap
+    inr = Math.min(inr, 20);
+    if (intensity !== 'intense') inr = 0;
+
+    // Enforce Colombia cap
+    co = Math.min(co, 30);
+    ind = Math.max(ind, 40);
+  }
+
+  // ── GROUP B ──
+  else if (['filter','french'].includes(method)) {
+    br = 40; co = 50; ind = 10;
+
+    if (aroma === 'choc')    { br = 55; co = 35; ind = 10; }
+    if (aroma === 'fruit')   { br = 25; co = 65; ind = 10; }
+    if (aroma === 'tobacco') { br = 35; co = 30; ind = 35; }
+
+    if (acidity === 'hate') { ind = Math.min(ind + 15, 35); co = Math.max(co - 15, 20); }
+    if (acidity === 'love') { co = Math.min(co + 10, 75); ind = Math.max(ind - 10, 0); }
+
+    if (milk === 'milk') { br = Math.min(br + 10, 60); co = Math.max(co - 10, 20); }
+  }
+
+  // ── GROUP C ──
+  else if (method === 'cold') {
+    br = 30; co = 70; ind = 0;
+
+    if (aroma === 'choc')  { br = 45; co = 55; }
+    if (aroma === 'fruit') { br = 15; co = 85; }
+    if (aroma === 'tobacco') { br = 35; co = 45; ind = 20; }
+
+    if (acidity === 'hate') { ind = 15; co = 50; br = 35; }
+    if (acidity === 'love') { co = Math.min(co + 5, 90); br = Math.max(br - 5, 10); }
+  }
+
+  // ── DECAF (Q3) ──
+  if (caffeine === 'yes') {
+    const decPct = 30;
+    // Replace portion of Brazil with Decaf
+    if (br >= decPct) { dec = decPct; br -= decPct; }
+    else { dec = br; br = 0; }
+  } else if (caffeine === 'some') {
+    const decPct = 15;
+    if (br >= decPct) { dec = decPct; br -= decPct; }
+    else { dec = br; br = 0; }
+  }
+
+  // ── NORMALISE to exactly 100 ──
+  let total = br + co + ind + inr + dec;
+  if (total !== 100) {
+    const diff = 100 - total;
+    // Adjust the largest non-zero non-fixed origin
+    if (co > 0 && !['espresso','moka','auto'].includes(method)) co += diff;
+    else if (br > 0) br += diff;
+    else ind += diff;
+  }
+
+  // Clamp negatives
+  br = Math.max(br, 0); co = Math.max(co, 0);
+  ind = Math.max(ind, 0); inr = Math.max(inr, 0); dec = Math.max(dec, 0);
+
+  // Final normalise
+  total = br + co + ind + inr + dec;
+  if (total !== 100) {
+    const scale = 100 / total;
+    br = Math.round(br * scale);
+    co = Math.round(co * scale);
+    ind = Math.round(ind * scale);
+    inr = Math.round(inr * scale);
+    dec = 100 - br - co - ind - inr;
+  }
+
+  return { br, co, ind, inr, dec };
+}
+
+// Flavour tags based on answers
+function getFlavours(ans, blend, lang) {
+  const tags = new Set();
+  const method = ans[0], intensity = ans[1], aroma = ans[3], acidity = ans[4];
+
+  const T = {
+    it: {
+      espresso:['corpo espresso','crema densa'], moka:['corpo moka','rotondità'], auto:['bilanciato','vellutato'],
+      filter:['chiarezza','leggerezza'], french:['struttura','immersione'], cold:['dolcezza fredda','morbidezza'],
+      light:['delicatezza','leggerezza'], balanced:['armonia','equilibrio'], bold:['corpo pieno','profondità'], intense:['potenza','carattere'],
+      choc:['cioccolato','nocciola','caramello'], fruit:['note fruttate','floreale'], tobacco:['tabacco','tostato','terroso'],
+      love:['vivacità','brillantezza'], hate:['dolcezza','rotondità'],
+      ind:['corpo India','neutralità acida'], inr:['robustezza','intensità']
+    },
+    en: {
+      espresso:['espresso body','dense crema'], moka:['moka body','roundness'], auto:['balanced','velvety'],
+      filter:['clarity','lightness'], french:['structure','immersion'], cold:['cold sweetness','smoothness'],
+      light:['delicacy','lightness'], balanced:['harmony','balance'], bold:['full body','depth'], intense:['power','character'],
+      choc:['chocolate','hazelnut','caramel'], fruit:['fruity notes','floral'], tobacco:['tobacco','roasted','earthy'],
+      love:['vibrancy','brightness'], hate:['sweetness','roundness'],
+      ind:['India body','low acidity'], inr:['robustness','intensity']
+    },
+    fr: {
+      espresso:['corps espresso','crème dense'], moka:['corps moka','rondeur'], auto:['équilibré','velouté'],
+      filter:['clarté','légèreté'], french:['structure','immersion'], cold:['douceur froide','onctuosité'],
+      light:['délicatesse','légèreté'], balanced:['harmonie','équilibre'], bold:['plein corps','profondeur'], intense:['puissance','caractère'],
+      choc:['chocolat','noisette','caramel'], fruit:['notes fruitées','floral'], tobacco:['tabac','torréfié','terreux'],
+      love:['vivacité','brillance'], hate:['douceur','rondeur'],
+      ind:['corps Inde','acidité neutre'], inr:['robustesse','intensité']
+    },
+    de: {
+      espresso:['Espressokörper','dichte Crema'], moka:['Mokakörper','Rundheit'], auto:['ausgewogen','samtig'],
+      filter:['Klarheit','Leichtigkeit'], french:['Struktur','Immersion'], cold:['kalte Süße','Weichheit'],
+      light:['Zartheit','Leichtigkeit'], balanced:['Harmonie','Balance'], bold:['vollmundig','Tiefe'], intense:['Kraft','Charakter'],
+      choc:['Schokolade','Haselnuss','Karamell'], fruit:['Fruchtnoten','blumig'], tobacco:['Tabak','geröstet','erdig'],
+      love:['Lebendigkeit','Helligkeit'], hate:['Süße','Rundheit'],
+      ind:['Indien Körper','geringe Säure'], inr:['Robustheit','Intensität']
+    }
+  };
+  const tl = T[lang] || T.it;
+  const add = (arr) => arr && arr.forEach(t => tags.add(t));
+  add(tl[method]); add(tl[intensity]);
+  if (aroma !== 'neutral') add(tl[aroma]);
+  if (acidity !== 'neutral') add(acidity === 'love' ? tl.love : tl.hate);
+  if (blend.ind > 20) add(tl.ind);
+  if (blend.inr > 0) add(tl.inr);
+  return [...tags].slice(0, 7);
+}
+
+// Roast level from intensity + method
+function getRoastIdx(ans) {
+  const method = ans[0], intensity = ans[1];
+  if (['filter','french','cold'].includes(method)) {
+    if (intensity === 'light') return 0;
+    if (intensity === 'balanced') return 1;
+    return 2;
+  }
+  if (intensity === 'light') return 1;
+  if (intensity === 'balanced') return 2;
+  if (intensity === 'bold') return 3;
+  return 4;
+}
+
+// ══════════════════════════════════════════
+// SHOPIFY CONFIG
+// Product "Miscela Personalizzata" — 12 variants (grind × weight)
+// ══════════════════════════════════════════
+const SHOP_URL = 'https://www.caffesuiso.ch';
+// Registre des blends (Google Sheet via Apps Script) — colle ici l'URL du web app (…/exec).
+// Tant que c'est vide, l'enregistrement est simplement ignoré.
+const REGISTRY_URL = 'https://script.google.com/macros/s/AKfycbwX_xG2GZT6EXdC46CXc4s-qVSWC2g6hklA4zBYTODmGdkEDmXaMWKXo7Afl6ikFXQj/exec';
+const VARIANTS = {
+  grani:    { '250g': '54876924805498', '500g': '54876924838266', '1kg': '54876924871034' },
+  moka:     { '250g': '54876924903802', '500g': '54876924936570', '1kg': '54876924969338' },
+  filtro:   { '250g': '54876925002106', '500g': '54876925034874', '1kg': '54876925067642' },
+  espresso: { '250g': '54876925100410', '500g': '54876925133178', '1kg': '54876925165946' }
+};
+// Canonical names used in the order properties (always IT for the roaster)
+const ORIGIN_IT = { br: 'Brasile Arabica', co: 'Colombia Arabica', ind: 'India Arabica', inr: 'India Robusta', dec: 'Brasile Decaf' };
+const ROAST_IT = ['Chiara', 'Medio-chiara', 'Media', 'Medio-scura', 'Scura'];
+const COPIED = { it: 'Copiato!', en: 'Copied!', fr: 'Copié !', de: 'Kopiert!' };
+
+// Short unique reference (no confusable chars), e.g. "A7K2" — disambiguates same-named blends
+function makeBlendId() {
+  const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s = '';
+  for (let i = 0; i < 4; i++) s += A[Math.floor(Math.random() * A.length)];
+  return s;
+}
+
+// Map quiz method (Q1) → Shopify grind variant key
+function methodToGrind(method) {
+  if (method === 'espresso') return 'espresso';
+  if (method === 'moka') return 'moka';
+  if (method === 'auto') return 'grani';      // bean-to-cup grinds itself → whole beans
+  return 'filtro';                             // filter / french / cold
+}
+
+// Build "Brasile Arabica 35% · Colombia 25% · …" sorted desc, non-zero only
+function compositionString(blend) {
+  return [['br', ORIGIN_IT.br], ['co', ORIGIN_IT.co], ['ind', ORIGIN_IT.ind], ['inr', ORIGIN_IT.inr], ['dec', ORIGIN_IT.dec]]
+    .filter(([k]) => blend[k] > 0)
+    .sort((a, b) => blend[b[0]] - blend[a[0]])
+    .map(([k, name]) => `${name} ${blend[k]}%`)
+    .join(' · ');
+}
+
+// Line-item properties attached to the order.
+// Keys starting with "_" are hidden from the customer (cart/checkout/emails)
+// but stay visible to you on the order in the Shopify admin.
+// Line-item properties attached to the order.
+// Only what the customer (and you, on the order) should see.
+function blendProps() {
+  const props = {
+    'Nome miscela': `${lastName} · #${lastBlendId}`,
+    'Composizione': compositionString(lastBlend)
+  };
+  if (isGift) props['Regalo'] = 'Sì';
+  return props;
+}
+
+// Enregistre le blend dans le registre (best-effort, n'empêche jamais la commande)
+function logBlend() {
+  if (!REGISTRY_URL) return;
+  const payload = {
+    name: lastName,
+    id: lastBlendId,
+    composition: compositionString(lastBlend),
+    weight: weight,
+    grind: methodToGrind(lastMethod),
+    gift: isGift ? 'Sì' : '',
+    br: lastBlend.br, co: lastBlend.co, ind: lastBlend.ind, inr: lastBlend.inr, dec: lastBlend.dec
+  };
+  const body = JSON.stringify(payload);
+  try {
+    // sendBeacon est conçu pour partir même quand la page se ferme/navigue
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(REGISTRY_URL, new Blob([body], { type: 'text/plain;charset=UTF-8' }));
+    } else {
+      fetch(REGISTRY_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body });
+    }
+  } catch (e) { /* le log ne doit jamais bloquer la commande */ }
+}
+
+// Add to cart via a POST form to /cart/add — this endpoint accepts
+// line-item properties (the GET cart permalink does NOT).
+function orderBlend() {
+  logBlend();
+  const variantId = VARIANTS[methodToGrind(lastMethod)][weight];
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = `${SHOP_URL}/cart/add`;
+  // Même onglet : navigation de premier plan, jamais bloquée comme un popup
+  const add = (name, value) => {
+    const i = document.createElement('input');
+    i.type = 'hidden'; i.name = name; i.value = value;
+    form.appendChild(i);
+  };
+  add('id', variantId);
+  add('quantity', '1');
+  Object.entries(blendProps()).forEach(([k, v]) => add(`properties[${k}]`, v));
+  add('return_to', '/cart');
+  document.body.appendChild(form);
+  form.submit();
+}
+
+async function shareBlend() {
+  const text = `${lastName} — ${compositionString(lastBlend)} · Caffè Suiso`;
+  const url = location.href.split('#')[0];
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: lastName, text, url });
+    } else {
+      await navigator.clipboard.writeText(`${text}\n${url}`);
+      const btn = document.getElementById('r-share');
+      const prev = btn.textContent;
+      btn.textContent = COPIED[lang] || 'Copied!';
+      setTimeout(() => { btn.textContent = prev; }, 1500);
+    }
+  } catch (e) { /* user cancelled share */ }
+}
+
+function toggleGift() {
+  isGift = !isGift;
+  document.getElementById('gift-row').classList.toggle('gift-on', isGift);
+}
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let lang = 'it';
+let step = 0;
+let answers = new Array(6).fill(null);
+let weight = '500g';
+let lastBlend = null, lastName = '', lastRoastIdx = 2, lastMethod = 'espresso', isGift = false, lastBlendId = '';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['it','en','fr','de'][i] === l);
+  });
+  const t = LANGS[l];
+  document.getElementById('intro-sub').innerHTML = t.introSub.replace(/\n/g, '<br>');
+  document.getElementById('intro-btn').textContent = t.introBtn;
+}
+
+function goScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+  step = 0; answers = new Array(6).fill(null);
+  goScreen('quiz');
+  renderQ();
+}
+
+function goBack() {
+  if (step > 0) { step--; renderQ(); }
+  else goScreen('intro');
+}
+
+function renderQ() {
+  const t = LANGS[lang];
+  const q = t.questions[step];
+  document.getElementById('prog-bar').style.width = (step / 6 * 100) + '%';
+  document.getElementById('step-lbl').textContent = (step + 1) + ' / 6';
+  document.getElementById('back-btn').textContent = t.back;
+
+  const isFullRow = q.opts.length === 3 || q.opts.length === 6;
+  const cols = q.opts.length === 6 ? 'grid-template-columns:1fr 1fr' : '';
+
+  document.getElementById('q-area').innerHTML = `
+    <div class="q-label">${q.label}</div>
+    <div class="q-text">${q.text}</div>
+    <div class="q-hint">${q.hint}</div>
+    <div class="options" style="${cols}">
+      ${q.opts.map((o, i) => `
+        <div class="opt-card ${answers[step] === i ? 'sel' : ''} ${q.opts.length === 3 && step < 4 ? 'full' : ''}"
+          onclick="pickAnswer(${i})">
+          <span class="opt-icon">${o.icon}</span>
+          <div class="opt-label">${o.l}</div>
+          <div class="opt-desc">${o.d}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function pickAnswer(i) {
+  answers[step] = i;
+  renderQ();
+  setTimeout(() => {
+    if (step < 5) { step++; renderQ(); }
+    else renderNaming();
+  }, 280);
+}
+
+function renderNaming() {
+  const t = LANGS[lang];
+  document.getElementById('name-title').innerHTML = t.nameTitle.replace(/\n/g, '<br>');
+  document.getElementById('name-sub').textContent = t.nameSub;
+  document.getElementById('name-input').placeholder = t.namePlaceholder;
+  document.getElementById('weight-lbl').textContent = t.weightLabel;
+  document.getElementById('wh0').textContent = t.weightHints[0];
+  document.getElementById('wh1').textContent = t.weightHints[1];
+  document.getElementById('wh2').textContent = t.weightHints[2];
+  document.getElementById('reveal-btn').textContent = t.revealBtn;
+  document.getElementById('name-input').value = '';
+  document.getElementById('name-count').textContent = '0';
+  goScreen('naming');
+}
+
+function updateCounter() {
+  const v = document.getElementById('name-input').value.length;
+  document.getElementById('name-count').textContent = v;
+}
+
+function pickWeight(w, el) {
+  weight = w;
+  document.querySelectorAll('.w-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function buildResult() {
+  const t = LANGS[lang];
+  const name = document.getElementById('name-input').value.trim() || (lang === 'it' ? 'La Mia Miscela' : lang === 'fr' ? 'Mon Blend' : lang === 'de' ? 'Mein Blend' : 'My Blend');
+
+  // Map answer indices to value strings
+  const ans = answers.map((ai, qi) => ai !== null ? LANGS[lang].questions[qi].opts[ai].v : null);
+
+  const blend = calcBlend(ans);
+  const flavours = getFlavours(ans, blend, lang);
+  const roastIdx = getRoastIdx(ans);
+
+  // Persist for the order / share / gift handlers
+  lastBlend = blend; lastName = name; lastRoastIdx = roastIdx; lastMethod = ans[0];
+  lastBlendId = makeBlendId();
+  isGift = false;
+  document.getElementById('gift-row').classList.remove('gift-on');
+
+  // Populate UI
+  document.getElementById('r-eyebrow').textContent = t.rEyebrow;
+  document.getElementById('r-name').textContent = name;
+  document.getElementById('r-ref').textContent = '#' + lastBlendId;
+  document.getElementById('r-tag').textContent = t.rTag;
+  document.getElementById('r-comp-label').textContent = t.rComp;
+  document.getElementById('r-profile-label').textContent = t.rProfile;
+  document.getElementById('r-roast-label').textContent = t.rRoast;
+  document.getElementById('r-roast-name').textContent = t.roastLevels[roastIdx];
+  document.getElementById('rl0').textContent = t.roastEnds[0];
+  document.getElementById('rl1').textContent = t.roastEnds[1];
+  document.getElementById('rl2').textContent = t.roastEnds[2];
+  document.getElementById('r-gift').textContent = t.rGift;
+  document.getElementById('r-gift-sub').textContent = t.rGiftSub;
+  document.getElementById('r-order').textContent = t.rOrder;
+  document.getElementById('r-share').textContent = t.rShare;
+  document.getElementById('r-restart').textContent = t.rRestart;
+
+  // Bars
+  const origins = [
+    { key: 'br',  pct: blend.br,  cls: 'fill-br',  name: t.origins.br },
+    { key: 'co',  pct: blend.co,  cls: 'fill-co',  name: t.origins.co },
+    { key: 'ind', pct: blend.ind, cls: 'fill-in',  name: t.origins.ind },
+    { key: 'inr', pct: blend.inr, cls: 'fill-inr', name: t.origins.inr },
+    { key: 'dec', pct: blend.dec, cls: 'fill-dec', name: t.origins.dec },
+  ].filter(o => o.pct > 0).sort((a, b) => b.pct - a.pct);
+
+  document.getElementById('blend-bars').innerHTML = origins.map(o => `
+    <div class="bar-row">
+      <div class="bar-meta">
+        <span class="bar-name">${o.name}</span>
+        <span class="bar-pct">${o.pct}%</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill ${o.cls}" style="width:0" data-w="${o.pct}"></div>
+      </div>
+    </div>`).join('');
+
+  // Flavour tags
+  document.getElementById('ftags').innerHTML = flavours.map(f => `<span class="ftag">${f}</span>`).join('');
+
+  // Roast marker
+  const roastPcts = [8, 24, 42, 64, 86];
+  document.getElementById('roast-thumb').style.left = roastPcts[roastIdx] + '%';
+
+  goScreen('result');
+
+  // Animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.bar-fill').forEach(b => {
+      b.style.width = b.dataset.w + '%';
+    });
+  }, 80);
+}
+
+function restart() {
+  step = 0; answers = new Array(6).fill(null); weight = '500g'; isGift = false;
+  document.getElementById('gift-row').classList.remove('gift-on');
+  document.querySelectorAll('.w-btn').forEach((b, i) => b.classList.toggle('sel', i === 1));
+  goScreen('intro');
+}
+</script>
+</body>
+</html>
