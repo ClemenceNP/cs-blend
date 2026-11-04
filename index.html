@@ -307,6 +307,8 @@
   .w-btn.sel .w-hint { color: rgba(245,237,216,0.6); }
   .w-size { font-size: 15px; font-weight: 500; color: var(--espresso); display: block; margin-bottom: 2px; }
   .w-hint { font-size: 11px; color: var(--muted); }
+  .w-price { display: block; margin-top: 6px; font-size: 13px; color: var(--espresso); }
+  .w-btn.sel .w-price { color: var(--milk); }
 
   /* ── RESULT ── */
   #result {
@@ -429,6 +431,7 @@
     transition: background 0.2s;
   }
   .btn-order:hover { background: var(--ink-hover); }
+  .order-price { display: block; margin-top: 4px; }
   .btn-share {
     flex: 1; padding: 13px;
     background: transparent; color: var(--roast);
@@ -482,6 +485,8 @@
     #result.active > * { grid-column: 1 / -1; }
     #result.active > .result-card { grid-column: auto; align-self: stretch; }
     .result-name { font-size: 60px; }
+    .order-price { display: inline; margin: 0; }
+    .order-price::before { content: ' · '; }
   }
   @media (max-width: 380px) {
     .options { grid-template-columns: 1fr; }
@@ -550,14 +555,17 @@
       <button class="w-btn" onclick="pickWeight('250g',this)">
         <span class="w-size">250g</span>
         <span class="w-hint" id="wh0">Assaggio</span>
+        <span class="w-price">CHF 12.–</span>
       </button>
       <button class="w-btn sel" onclick="pickWeight('500g',this)">
         <span class="w-size">500g</span>
         <span class="w-hint" id="wh1">Classico</span>
+        <span class="w-price">CHF 18.–</span>
       </button>
       <button class="w-btn" onclick="pickWeight('1kg',this)">
         <span class="w-size">1 kg</span>
         <span class="w-hint" id="wh2">Appassionato</span>
+        <span class="w-price">CHF 30.–</span>
       </button>
     </div>
 
@@ -1125,6 +1133,11 @@ function getRoastIdx(ans) {
 
 // ══════════════════════════════════════════
 // SHOPIFY CONFIG
+// Prices shown in the quiz (CHF), same for every grind. Must match the Shopify prices of
+// "Miscela Personalizzata": the cart always charges the Shopify price, this is display only.
+const PRICES = { '250g': 12, '500g': 18, '1kg': 30 };
+const priceText = w => `CHF ${PRICES[w]}.–`;
+
 // Product "Miscela Personalizzata" — 12 variants (grind × weight)
 // ══════════════════════════════════════════
 const SHOP_URL = 'https://www.caffesuiso.ch';
@@ -1401,7 +1414,7 @@ function buildResult() {
   document.getElementById('rl2').textContent = t.roastEnds[2];
   document.getElementById('r-gift').textContent = t.rGift;
   document.getElementById('r-gift-sub').textContent = t.rGiftSub;
-  document.getElementById('r-order').textContent = t.rOrder;
+  document.getElementById('r-order').innerHTML = `${t.rOrder}<span class="order-price">${priceText(weight)}</span>`;
   document.getElementById('r-share').textContent = t.rShare;
   document.getElementById('r-restart').textContent = t.rRestart;
 

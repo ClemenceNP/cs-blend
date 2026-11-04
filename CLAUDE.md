@@ -16,6 +16,8 @@ Quiz autonome (`index.html`, 4 langues) publié sur https://blend.caffesuiso.ch 
 - **Panier Shopify** : `orderBlend()` poste vers `https://www.caffesuiso.ch/cart/add` les champs `id`, `quantity`,
   `properties[Nome miscela]`, `properties[Composizione]`, `properties[Regalo]` (si cadeau), `return_to`.
   Les identifiants de variantes `VARIANTS` correspondent au produit « Miscela Personalizzata ».
+- **Prix affichés** : `PRICES` (250g / 500g / 1kg, en CHF) est un simple affichage ; le panier facture toujours le prix
+  Shopify. Si Clémence change les prix de « Miscela Personalizzata » dans Shopify, mettre `PRICES` à jour en même temps.
 - **Algorithme** : `calcBlend()` lit les valeurs `v` des options (`espresso`, `light`, `choc`…), pas les textes.
   On peut changer les textes et les icônes affichés, pas les `v`.
 - **Registre Google Sheet** (`REGISTRY_URL`, envoi dans `logBlend()`) : un Apps Script, hors de ce dépôt,
