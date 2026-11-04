@@ -84,6 +84,9 @@
 
   .brand { margin-bottom: 2.5rem; }
   .brand-logo { display: block; width: 150px; height: auto; }
+  @media (min-width: 768px) {
+    .brand-logo { width: 400px; }
+  }
   .hero-title {
     font-family: 'Recife Text', Georgia, serif;
     font-size: clamp(36px, 9vw, 56px);
@@ -230,7 +233,8 @@
   }
   .opt-card.sel .opt-label { color: var(--milk); }
   .opt-card.sel .opt-desc { color: rgba(245,237,216,0.65); }
-  .opt-icon { font-size: 20px; margin-bottom: 6px; display: block; line-height: 1; }
+  .opt-icon { display: block; margin-bottom: 8px; line-height: 0; color: var(--ink); min-height: 10px; --crease: #FFFFFF; }
+  .opt-card.sel .opt-icon { color: var(--milk); --crease: var(--ink); }
   .opt-label {
     font-size: 13px; font-weight: 500;
     color: var(--espresso); margin-bottom: 3px;
@@ -457,7 +461,10 @@
   <!-- ═══════════════ INTRO ═══════════════ -->
   <div id="intro" class="screen active">
     <div class="brand">
-      <img class="brand-logo" src="logo.png" alt="Caffè Suiso" width="150" height="168">
+      <picture>
+        <source media="(min-width: 768px)" srcset="logo-horizontal.png" width="800" height="234">
+        <img class="brand-logo" src="logo.png" alt="Caffè Suiso" width="150" height="168">
+      </picture>
     </div>
 
     <h1 class="hero-title">Crea il tuo<br><em>blend</em><br>personale.</h1>
@@ -584,54 +591,54 @@ const LANGS = {
       {
         label: 'Domanda 1', text: 'Come estrai il tuo caffè?', hint: 'Il tuo metodo principale',
         opts: [
-          { icon: '☕', l: 'Espresso', d: 'Estratto corto, macchina da bar', v: 'espresso' },
-          { icon: '🫖', l: 'Moka', d: 'Caffettiera classica sul fuoco', v: 'moka' },
-          { icon: '🤖', l: 'Automatica', d: 'Macchina con macinacaffè integrato', v: 'auto' },
-          { icon: '🖤', l: 'Filtro / V60', d: 'Estrazione lenta, tazza lunga', v: 'filter' },
-          { icon: '🫙', l: 'French Press', d: 'Immersione con stantuffo', v: 'french' },
-          { icon: '🧊', l: 'Cold Brew', d: 'Estrazione a freddo, 12–24h', v: 'cold' },
+          { l: 'Espresso', d: 'Estratto corto, macchina da bar', v: 'espresso' },
+          { l: 'Moka', d: 'Caffettiera classica sul fuoco', v: 'moka' },
+          { l: 'Automatica', d: 'Macchina con macinacaffè integrato', v: 'auto' },
+          { l: 'Filtro / V60', d: 'Estrazione lenta, tazza lunga', v: 'filter' },
+          { l: 'French Press', d: 'Immersione con stantuffo', v: 'french' },
+          { l: 'Cold Brew', d: 'Estrazione a freddo, 12–24h', v: 'cold' },
         ]
       },
       {
         label: 'Domanda 2', text: 'Che intensità cerchi nella tazza?', hint: 'Corpo e carattere',
         opts: [
-          { icon: '🌊', l: 'Delicato', d: 'Leggero, gentile al palato', v: 'light' },
-          { icon: '⚖️', l: 'Equilibrato', d: 'Nessun eccesso, armonia', v: 'balanced' },
-          { icon: '🔥', l: 'Corposo', d: 'Presenza decisa, pieno', v: 'bold' },
-          { icon: '⚡', l: 'Molto forte', d: 'Massima potenza, voglio sentirlo', v: 'intense' },
+          { l: 'Delicato', d: 'Leggero, gentile al palato', v: 'light' },
+          { l: 'Equilibrato', d: 'Nessun eccesso, armonia', v: 'balanced' },
+          { l: 'Corposo', d: 'Presenza decisa, pieno', v: 'bold' },
+          { l: 'Molto forte', d: 'Massima potenza, voglio sentirlo', v: 'intense' },
         ]
       },
       {
         label: 'Domanda 3', text: 'Sei sensibile alla caffeina?', hint: 'Per calibrare il contenuto',
         opts: [
-          { icon: '💪', l: 'No, più caffè', d: 'Caffeina piena, nessun problema', v: 'no' },
-          { icon: '🤔', l: 'Un poco', d: 'Preferisco moderarla', v: 'some' },
-          { icon: '🌙', l: 'Sì, la evito', d: 'Voglio meno caffeina possibile', v: 'yes' },
+          { l: 'No, più caffè', d: 'Caffeina piena, nessun problema', v: 'no' },
+          { l: 'Un poco', d: 'Preferisco moderarla', v: 'some' },
+          { l: 'Sì, la evito', d: 'Voglio meno caffeina possibile', v: 'yes' },
         ]
       },
       {
         label: 'Domanda 4', text: 'Cosa preferisci nel profilo aromatico?', hint: 'Il tuo gusto',
         opts: [
-          { icon: '🍫', l: 'Cioccolato e nocciola', d: 'Caldo, rotondo, dolce', v: 'choc' },
-          { icon: '🍋', l: 'Fruttato e floreale', d: 'Vivace, leggero, aromatico', v: 'fruit' },
-          { icon: '🌿', l: 'Tabacco e tostato', d: 'Intenso, terroso, profondo', v: 'tobacco' },
-          { icon: '🤷', l: 'Non so', d: 'Lascio scegliere all\'algoritmo', v: 'neutral' },
+          { l: 'Cioccolato e nocciola', d: 'Caldo, rotondo, dolce', v: 'choc' },
+          { l: 'Fruttato e floreale', d: 'Vivace, leggero, aromatico', v: 'fruit' },
+          { l: 'Tabacco e tostato', d: 'Intenso, terroso, profondo', v: 'tobacco' },
+          { l: 'Non so', d: 'Lascio scegliere all\'algoritmo', v: 'neutral' },
         ]
       },
       {
         label: 'Domanda 5', text: 'Come percepisci l\'acidità?', hint: 'La tua tolleranza',
         opts: [
-          { icon: '✨', l: 'La adoro', d: 'Vivacità e brillantezza', v: 'love' },
-          { icon: '😐', l: 'Neutra', d: 'Non mi disturba', v: 'neutral' },
-          { icon: '😣', l: 'La detesto', d: 'Voglio dolcezza, zero acidità', v: 'hate' },
+          { l: 'La adoro', d: 'Vivacità e brillantezza', v: 'love' },
+          { l: 'Neutra', d: 'Non mi disturba', v: 'neutral' },
+          { l: 'La detesto', d: 'Voglio dolcezza, zero acidità', v: 'hate' },
         ]
       },
       {
         label: 'Domanda 6', text: 'Come lo bevi di solito?', hint: 'La tua abitudine quotidiana',
         opts: [
-          { icon: '⬛', l: 'Nero, puro', d: 'Caffè senza aggiunte', v: 'black' },
-          { icon: '🥛', l: 'Con latte', d: 'Latte, bevanda vegetale, cappuccino', v: 'milk' },
-          { icon: '🔄', l: 'Dipende', d: 'A volte uno, a volte l\'altro', v: 'both' },
+          { l: 'Nero, puro', d: 'Caffè senza aggiunte', v: 'black' },
+          { l: 'Con latte', d: 'Latte, bevanda vegetale, cappuccino', v: 'milk' },
+          { l: 'Dipende', d: 'A volte uno, a volte l\'altro', v: 'both' },
         ]
       }
     ],
@@ -663,54 +670,54 @@ const LANGS = {
       {
         label: 'Question 1', text: 'How do you brew your coffee?', hint: 'Your main method',
         opts: [
-          { icon: '☕', l: 'Espresso', d: 'Short shot, espresso machine', v: 'espresso' },
-          { icon: '🫖', l: 'Moka pot', d: 'Classic stovetop brewer', v: 'moka' },
-          { icon: '🤖', l: 'Automatic', d: 'Bean-to-cup machine', v: 'auto' },
-          { icon: '🖤', l: 'Filter / V60', d: 'Slow brew, long cup', v: 'filter' },
-          { icon: '🫙', l: 'French Press', d: 'Full immersion method', v: 'french' },
-          { icon: '🧊', l: 'Cold Brew', d: 'Cold extraction, 12–24h', v: 'cold' },
+          { l: 'Espresso', d: 'Short shot, espresso machine', v: 'espresso' },
+          { l: 'Moka pot', d: 'Classic stovetop brewer', v: 'moka' },
+          { l: 'Automatic', d: 'Bean-to-cup machine', v: 'auto' },
+          { l: 'Filter / V60', d: 'Slow brew, long cup', v: 'filter' },
+          { l: 'French Press', d: 'Full immersion method', v: 'french' },
+          { l: 'Cold Brew', d: 'Cold extraction, 12–24h', v: 'cold' },
         ]
       },
       {
         label: 'Question 2', text: 'What intensity do you seek?', hint: 'Body and character',
         opts: [
-          { icon: '🌊', l: 'Delicate', d: 'Light, gentle on the palate', v: 'light' },
-          { icon: '⚖️', l: 'Balanced', d: 'No extremes, harmony', v: 'balanced' },
-          { icon: '🔥', l: 'Bold', d: 'Full-bodied, assertive', v: 'bold' },
-          { icon: '⚡', l: 'Very strong', d: 'Maximum punch', v: 'intense' },
+          { l: 'Delicate', d: 'Light, gentle on the palate', v: 'light' },
+          { l: 'Balanced', d: 'No extremes, harmony', v: 'balanced' },
+          { l: 'Bold', d: 'Full-bodied, assertive', v: 'bold' },
+          { l: 'Very strong', d: 'Maximum punch', v: 'intense' },
         ]
       },
       {
         label: 'Question 3', text: 'Are you sensitive to caffeine?', hint: 'To calibrate content',
         opts: [
-          { icon: '💪', l: 'Not at all', d: 'Full caffeine, no problem', v: 'no' },
-          { icon: '🤔', l: 'A little', d: 'I prefer to moderate it', v: 'some' },
-          { icon: '🌙', l: 'Yes, I avoid it', d: 'I want as little as possible', v: 'yes' },
+          { l: 'Not at all', d: 'Full caffeine, no problem', v: 'no' },
+          { l: 'A little', d: 'I prefer to moderate it', v: 'some' },
+          { l: 'Yes, I avoid it', d: 'I want as little as possible', v: 'yes' },
         ]
       },
       {
         label: 'Question 4', text: 'What aroma profile do you prefer?', hint: 'Your taste',
         opts: [
-          { icon: '🍫', l: 'Chocolate & hazelnut', d: 'Warm, round, sweet', v: 'choc' },
-          { icon: '🍋', l: 'Fruity & floral', d: 'Bright, light, aromatic', v: 'fruit' },
-          { icon: '🌿', l: 'Tobacco & roasted', d: 'Intense, earthy, deep', v: 'tobacco' },
-          { icon: '🤷', l: 'Not sure', d: 'Let the algorithm decide', v: 'neutral' },
+          { l: 'Chocolate & hazelnut', d: 'Warm, round, sweet', v: 'choc' },
+          { l: 'Fruity & floral', d: 'Bright, light, aromatic', v: 'fruit' },
+          { l: 'Tobacco & roasted', d: 'Intense, earthy, deep', v: 'tobacco' },
+          { l: 'Not sure', d: 'Let the algorithm decide', v: 'neutral' },
         ]
       },
       {
         label: 'Question 5', text: 'How do you perceive acidity?', hint: 'Your tolerance',
         opts: [
-          { icon: '✨', l: 'I love it', d: 'Vibrancy and brightness', v: 'love' },
-          { icon: '😐', l: 'Neutral', d: "It doesn't bother me", v: 'neutral' },
-          { icon: '😣', l: 'I hate it', d: 'Sweetness only, zero acidity', v: 'hate' },
+          { l: 'I love it', d: 'Vibrancy and brightness', v: 'love' },
+          { l: 'Neutral', d: "It doesn't bother me", v: 'neutral' },
+          { l: 'I hate it', d: 'Sweetness only, zero acidity', v: 'hate' },
         ]
       },
       {
         label: 'Question 6', text: 'How do you usually drink it?', hint: 'Your daily habit',
         opts: [
-          { icon: '⬛', l: 'Black, pure', d: 'Coffee with nothing added', v: 'black' },
-          { icon: '🥛', l: 'With milk', d: 'Milk, plant-based, cappuccino', v: 'milk' },
-          { icon: '🔄', l: 'It varies', d: 'Sometimes one, sometimes both', v: 'both' },
+          { l: 'Black, pure', d: 'Coffee with nothing added', v: 'black' },
+          { l: 'With milk', d: 'Milk, plant-based, cappuccino', v: 'milk' },
+          { l: 'It varies', d: 'Sometimes one, sometimes both', v: 'both' },
         ]
       }
     ],
@@ -740,56 +747,56 @@ const LANGS = {
     back: '← Retour',
     questions: [
       {
-        label: 'Question 1', text: 'Comment préparez-vous votre café ?', hint: 'Votre méthode principale',
+        label: 'Question 1', text: 'Comment préparez-vous votre café ?', hint: 'Votre méthode principale',
         opts: [
-          { icon: '☕', l: 'Espresso', d: 'Machine à expresso, café court', v: 'espresso' },
-          { icon: '🫖', l: 'Moka', d: 'Cafetière italienne sur le feu', v: 'moka' },
-          { icon: '🤖', l: 'Automatique', d: 'Machine avec moulin intégré', v: 'auto' },
-          { icon: '🖤', l: 'Filtre / V60', d: 'Extraction lente, tasse longue', v: 'filter' },
-          { icon: '🫙', l: 'French Press', d: 'Immersion avec piston', v: 'french' },
-          { icon: '🧊', l: 'Cold Brew', d: 'Extraction à froid, 12–24h', v: 'cold' },
+          { l: 'Espresso', d: 'Machine à expresso, café court', v: 'espresso' },
+          { l: 'Moka', d: 'Cafetière italienne sur le feu', v: 'moka' },
+          { l: 'Automatique', d: 'Machine avec moulin intégré', v: 'auto' },
+          { l: 'Filtre / V60', d: 'Extraction lente, tasse longue', v: 'filter' },
+          { l: 'French Press', d: 'Immersion avec piston', v: 'french' },
+          { l: 'Cold Brew', d: 'Extraction à froid, 12–24h', v: 'cold' },
         ]
       },
       {
-        label: 'Question 2', text: 'Quelle intensité recherchez-vous ?', hint: 'Corps et caractère',
+        label: 'Question 2', text: 'Quelle intensité recherchez-vous ?', hint: 'Corps et caractère',
         opts: [
-          { icon: '🌊', l: 'Délicat', d: 'Léger, doux en bouche', v: 'light' },
-          { icon: '⚖️', l: 'Équilibré', d: 'Harmonie, sans excès', v: 'balanced' },
-          { icon: '🔥', l: 'Corsé', d: 'Présence affirmée', v: 'bold' },
-          { icon: '⚡', l: 'Très fort', d: 'Puissance maximale', v: 'intense' },
+          { l: 'Délicat', d: 'Léger, doux en bouche', v: 'light' },
+          { l: 'Équilibré', d: 'Harmonie, sans excès', v: 'balanced' },
+          { l: 'Corsé', d: 'Présence affirmée', v: 'bold' },
+          { l: 'Très fort', d: 'Puissance maximale', v: 'intense' },
         ]
       },
       {
-        label: 'Question 3', text: 'Êtes-vous sensible à la caféine ?', hint: 'Pour calibrer la teneur',
+        label: 'Question 3', text: 'Êtes-vous sensible à la caféine ?', hint: 'Pour calibrer la teneur',
         opts: [
-          { icon: '💪', l: 'Pas du tout', d: 'Caféine pleine, aucun problème', v: 'no' },
-          { icon: '🤔', l: 'Un peu', d: 'Je préfère la modérer', v: 'some' },
-          { icon: '🌙', l: 'Oui, je l\'évite', d: 'Le moins possible', v: 'yes' },
+          { l: 'Pas du tout', d: 'Caféine pleine, aucun problème', v: 'no' },
+          { l: 'Un peu', d: 'Je préfère la modérer', v: 'some' },
+          { l: 'Oui, je l\'évite', d: 'Le moins possible', v: 'yes' },
         ]
       },
       {
-        label: 'Question 4', text: 'Quel profil aromatique préférez-vous ?', hint: 'Votre goût',
+        label: 'Question 4', text: 'Quel profil aromatique préférez-vous ?', hint: 'Votre goût',
         opts: [
-          { icon: '🍫', l: 'Chocolat et noisette', d: 'Chaud, rond, doux', v: 'choc' },
-          { icon: '🍋', l: 'Fruité et floral', d: 'Vif, léger, aromatique', v: 'fruit' },
-          { icon: '🌿', l: 'Tabac et torréfié', d: 'Intense, terreux, profond', v: 'tobacco' },
-          { icon: '🤷', l: 'Je ne sais pas', d: "Laissez l'algorithme choisir", v: 'neutral' },
+          { l: 'Chocolat et noisette', d: 'Chaud, rond, doux', v: 'choc' },
+          { l: 'Fruité et floral', d: 'Vif, léger, aromatique', v: 'fruit' },
+          { l: 'Tabac et torréfié', d: 'Intense, terreux, profond', v: 'tobacco' },
+          { l: 'Je ne sais pas', d: "Laissez l'algorithme choisir", v: 'neutral' },
         ]
       },
       {
-        label: 'Question 5', text: 'Comment percevez-vous l\'acidité ?', hint: 'Votre tolérance',
+        label: 'Question 5', text: 'Comment percevez-vous l\'acidité ?', hint: 'Votre tolérance',
         opts: [
-          { icon: '✨', l: 'Je l\'adore', d: 'Vivacité et brillance', v: 'love' },
-          { icon: '😐', l: 'Neutre', d: 'Elle ne me dérange pas', v: 'neutral' },
-          { icon: '😣', l: 'Je la déteste', d: 'Douceur uniquement, zéro acidité', v: 'hate' },
+          { l: 'Je l\'adore', d: 'Vivacité et brillance', v: 'love' },
+          { l: 'Neutre', d: 'Elle ne me dérange pas', v: 'neutral' },
+          { l: 'Je la déteste', d: 'Douceur uniquement, zéro acidité', v: 'hate' },
         ]
       },
       {
-        label: 'Question 6', text: 'Comment le buvez-vous habituellement ?', hint: 'Votre habitude',
+        label: 'Question 6', text: 'Comment le buvez-vous habituellement ?', hint: 'Votre habitude',
         opts: [
-          { icon: '⬛', l: 'Noir, pur', d: 'Sans rien ajouter', v: 'black' },
-          { icon: '🥛', l: 'Avec du lait', d: 'Lait, végétal, cappuccino', v: 'milk' },
-          { icon: '🔄', l: 'Ça dépend', d: "Tantôt l'un, tantôt l'autre", v: 'both' },
+          { l: 'Noir, pur', d: 'Sans rien ajouter', v: 'black' },
+          { l: 'Avec du lait', d: 'Lait, végétal, cappuccino', v: 'milk' },
+          { l: 'Ça dépend', d: "Tantôt l'un, tantôt l'autre", v: 'both' },
         ]
       }
     ],
@@ -821,54 +828,54 @@ const LANGS = {
       {
         label: 'Frage 1', text: 'Wie brühst du deinen Kaffee?', hint: 'Deine Hauptmethode',
         opts: [
-          { icon: '☕', l: 'Espresso', d: 'Kurzer Bezug, Espressomaschine', v: 'espresso' },
-          { icon: '🫖', l: 'Moka', d: 'Klassische Herdkanne', v: 'moka' },
-          { icon: '🤖', l: 'Vollautomat', d: 'Maschine mit Mahlwerk', v: 'auto' },
-          { icon: '🖤', l: 'Filter / V60', d: 'Langsame Extraktion, lange Tasse', v: 'filter' },
-          { icon: '🫙', l: 'French Press', d: 'Tauchbrühen mit Stempel', v: 'french' },
-          { icon: '🧊', l: 'Cold Brew', d: 'Kaltextraktion, 12–24 Std.', v: 'cold' },
+          { l: 'Espresso', d: 'Kurzer Bezug, Espressomaschine', v: 'espresso' },
+          { l: 'Moka', d: 'Klassische Herdkanne', v: 'moka' },
+          { l: 'Vollautomat', d: 'Maschine mit Mahlwerk', v: 'auto' },
+          { l: 'Filter / V60', d: 'Langsame Extraktion, lange Tasse', v: 'filter' },
+          { l: 'French Press', d: 'Tauchbrühen mit Stempel', v: 'french' },
+          { l: 'Cold Brew', d: 'Kaltextraktion, 12–24 Std.', v: 'cold' },
         ]
       },
       {
         label: 'Frage 2', text: 'Welche Intensität suchst du?', hint: 'Körper und Charakter',
         opts: [
-          { icon: '🌊', l: 'Sanft', d: 'Leicht, zart am Gaumen', v: 'light' },
-          { icon: '⚖️', l: 'Ausgewogen', d: 'Keine Extreme, Harmonie', v: 'balanced' },
-          { icon: '🔥', l: 'Kräftig', d: 'Vollmundig, bestimmt', v: 'bold' },
-          { icon: '⚡', l: 'Sehr stark', d: 'Maximale Kraft', v: 'intense' },
+          { l: 'Sanft', d: 'Leicht, zart am Gaumen', v: 'light' },
+          { l: 'Ausgewogen', d: 'Keine Extreme, Harmonie', v: 'balanced' },
+          { l: 'Kräftig', d: 'Vollmundig, bestimmt', v: 'bold' },
+          { l: 'Sehr stark', d: 'Maximale Kraft', v: 'intense' },
         ]
       },
       {
         label: 'Frage 3', text: 'Reagierst du empfindlich auf Koffein?', hint: 'Zur Kalibrierung',
         opts: [
-          { icon: '💪', l: 'Gar nicht', d: 'Volles Koffein, kein Problem', v: 'no' },
-          { icon: '🤔', l: 'Ein wenig', d: 'Ich bevorzuge es zu mäßigen', v: 'some' },
-          { icon: '🌙', l: 'Ja, ich meide es', d: 'So wenig wie möglich', v: 'yes' },
+          { l: 'Gar nicht', d: 'Volles Koffein, kein Problem', v: 'no' },
+          { l: 'Ein wenig', d: 'Ich bevorzuge es zu mäßigen', v: 'some' },
+          { l: 'Ja, ich meide es', d: 'So wenig wie möglich', v: 'yes' },
         ]
       },
       {
         label: 'Frage 4', text: 'Welches Aromaprofil bevorzugst du?', hint: 'Dein Geschmack',
         opts: [
-          { icon: '🍫', l: 'Schokolade & Haselnuss', d: 'Warm, rund, süß', v: 'choc' },
-          { icon: '🍋', l: 'Fruchtig & blumig', d: 'Lebendig, leicht, aromatisch', v: 'fruit' },
-          { icon: '🌿', l: 'Tabak & geröstet', d: 'Intensiv, erdig, tief', v: 'tobacco' },
-          { icon: '🤷', l: 'Unsicher', d: 'Den Algorithmus entscheiden lassen', v: 'neutral' },
+          { l: 'Schokolade & Haselnuss', d: 'Warm, rund, süß', v: 'choc' },
+          { l: 'Fruchtig & blumig', d: 'Lebendig, leicht, aromatisch', v: 'fruit' },
+          { l: 'Tabak & geröstet', d: 'Intensiv, erdig, tief', v: 'tobacco' },
+          { l: 'Unsicher', d: 'Den Algorithmus entscheiden lassen', v: 'neutral' },
         ]
       },
       {
         label: 'Frage 5', text: 'Wie nimmst du Säure wahr?', hint: 'Deine Toleranz',
         opts: [
-          { icon: '✨', l: 'Ich liebe sie', d: 'Lebendigkeit und Helligkeit', v: 'love' },
-          { icon: '😐', l: 'Neutral', d: 'Stört mich nicht', v: 'neutral' },
-          { icon: '😣', l: 'Ich hasse sie', d: 'Nur Süße, keine Säure', v: 'hate' },
+          { l: 'Ich liebe sie', d: 'Lebendigkeit und Helligkeit', v: 'love' },
+          { l: 'Neutral', d: 'Stört mich nicht', v: 'neutral' },
+          { l: 'Ich hasse sie', d: 'Nur Süße, keine Säure', v: 'hate' },
         ]
       },
       {
         label: 'Frage 6', text: 'Wie trinkst du ihn normalerweise?', hint: 'Deine tägliche Gewohnheit',
         opts: [
-          { icon: '⬛', l: 'Schwarz, pur', d: 'Ohne alles', v: 'black' },
-          { icon: '🥛', l: 'Mit Milch', d: 'Milch, pflanzlich, Cappuccino', v: 'milk' },
-          { icon: '🔄', l: 'Wechselnd', d: 'Mal so, mal so', v: 'both' },
+          { l: 'Schwarz, pur', d: 'Ohne alles', v: 'black' },
+          { l: 'Mit Milch', d: 'Milch, pflanzlich, Cappuccino', v: 'milk' },
+          { l: 'Wechselnd', d: 'Mal so, mal so', v: 'both' },
         ]
       }
     ],
@@ -1260,12 +1267,39 @@ function renderQ() {
       ${q.opts.map((o, i) => `
         <div class="opt-card ${answers[step] === i ? 'sel' : ''} ${q.opts.length === 3 && step < 4 ? 'full' : ''}"
           onclick="pickAnswer(${i})">
-          <span class="opt-icon">${o.icon}</span>
+          <span class="opt-icon" aria-hidden="true">${ICONS[step + ':' + o.v] || ''}</span>
           <div class="opt-label">${o.l}</div>
           <div class="opt-desc">${o.d}</div>
         </div>`).join('')}
     </div>`;
 }
+
+// Line icons of the answers (same style as the pictograms on the coffee labels), by question index and v
+const ICONS = {
+ "0:espresso": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 10h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5z\"/><path d=\"M16 11.5h1.2a2 2 0 0 1 0 4H16\"/><path d=\"M4 20.5h14\"/><path d=\"M9.5 4.5c-.8.8.8 1.7 0 2.5M12.5 4.5c-.8.8.8 1.7 0 2.5\"/></svg>",
+ "0:moka": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11.5 2.5V4\"/><path d=\"M7.5 4h8l-1.3 7H8.8z\"/><path d=\"M8.8 11h5.4l1.6 9.5H7.2z\"/><path d=\"M15.4 5.5h2.4l-1 4.5h-1.6\"/><path d=\"M7.5 4 6 3\"/></svg>",
+ "0:auto": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4.5\" y=\"6\" width=\"15\" height=\"15\" rx=\"1.5\"/><path d=\"M8 6l1-3h6l1 3\"/><path d=\"M4.5 10h15\"/><path d=\"M11 10v2M13 10v2\"/><path d=\"M9.8 15h4.4v2.2a1.6 1.6 0 0 1-1.6 1.6h-1.2a1.6 1.6 0 0 1-1.6-1.6z\"/></svg>",
+ "0:filter": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 4.5h16\"/><path d=\"M5.5 4.5 10 12h4l4.5-7.5\"/><path d=\"M9.5 7.5l1.3 2.5M14.5 7.5l-1.3 2.5\"/><path d=\"M9 13.5h6\"/><path d=\"M7 15.5h10v1a4.5 4.5 0 0 1-4.5 4.5h-1A4.5 4.5 0 0 1 7 16.5z\"/></svg>",
+ "0:french": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v8\"/><path d=\"M10.5 2h3\"/><rect x=\"7\" y=\"7\" width=\"10\" height=\"14\" rx=\"1\"/><path d=\"M8.5 10.5h7\"/><path d=\"M17 9.5h2v8h-2\"/><path d=\"M7 21h10\"/></svg>",
+ "0:cold": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 5h12l-1.4 15a1 1 0 0 1-1 .9H8.4a1 1 0 0 1-1-.9z\"/><path d=\"M14.5 5 16.5 1.5\"/><rect x=\"8.6\" y=\"9\" width=\"3.6\" height=\"3.6\" rx=\".5\" transform=\"rotate(-12 10.4 10.8)\"/><rect x=\"11.6\" y=\"13.2\" width=\"3.6\" height=\"3.6\" rx=\".5\" transform=\"rotate(10 13.4 15)\"/></svg>",
+ "1:light": "<svg viewBox=\"0 0 54 10\" width=\"54\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"16\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"27\" cy=\"5\" r=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"38\" cy=\"5\" r=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"49\" cy=\"5\" r=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>",
+ "1:balanced": "<svg viewBox=\"0 0 54 10\" width=\"54\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"16\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"27\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"38\" cy=\"5\" r=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"49\" cy=\"5\" r=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>",
+ "1:bold": "<svg viewBox=\"0 0 54 10\" width=\"54\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"16\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"27\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"38\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"49\" cy=\"5\" r=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>",
+ "1:intense": "<svg viewBox=\"0 0 54 10\" width=\"54\" height=\"10\"><circle cx=\"5\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"16\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"27\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"38\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"49\" cy=\"5\" r=\"4\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>",
+ "2:no": "<svg viewBox=\"0 0 42 24\" width=\"46\" height=\"26\"><g transform=\"rotate(-25 7.5 12)\"><ellipse cx=\"7.5\" cy=\"12\" rx=\"6\" ry=\"4.3\" fill=\"currentColor\"/><path d=\"M2.0999999999999996 12.6c1.8-2.6 3.6 1.4 5.4-.6s3.6-2.2 5.4.2\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" style=\"stroke:var(--crease)\"/></g><g transform=\"rotate(-25 20.5 12)\"><ellipse cx=\"20.5\" cy=\"12\" rx=\"6\" ry=\"4.3\" fill=\"currentColor\"/><path d=\"M15.1 12.6c1.8-2.6 3.6 1.4 5.4-.6s3.6-2.2 5.4.2\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" style=\"stroke:var(--crease)\"/></g><g transform=\"rotate(-25 33.5 12)\"><ellipse cx=\"33.5\" cy=\"12\" rx=\"6\" ry=\"4.3\" fill=\"currentColor\"/><path d=\"M28.1 12.6c1.8-2.6 3.6 1.4 5.4-.6s3.6-2.2 5.4.2\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" style=\"stroke:var(--crease)\"/></g></svg>",
+ "2:some": "<svg viewBox=\"0 0 42 24\" width=\"46\" height=\"26\"><g transform=\"rotate(-25 7.5 12)\"><ellipse cx=\"7.5\" cy=\"12\" rx=\"6\" ry=\"4.3\" fill=\"currentColor\"/><path d=\"M2.0999999999999996 12.6c1.8-2.6 3.6 1.4 5.4-.6s3.6-2.2 5.4.2\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" style=\"stroke:var(--crease)\"/></g><g transform=\"rotate(-25 20.5 12)\"><ellipse cx=\"20.5\" cy=\"12\" rx=\"6\" ry=\"4.3\" fill=\"currentColor\"/><path d=\"M15.1 12.6c1.8-2.6 3.6 1.4 5.4-.6s3.6-2.2 5.4.2\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" style=\"stroke:var(--crease)\"/></g></svg>",
+ "2:yes": "<svg viewBox=\"0 0 42 24\" width=\"46\" height=\"26\"><g transform=\"rotate(-25 7.5 12)\"><ellipse cx=\"7.5\" cy=\"12\" rx=\"6\" ry=\"4.3\" fill=\"currentColor\"/><path d=\"M2.0999999999999996 12.6c1.8-2.6 3.6 1.4 5.4-.6s3.6-2.2 5.4.2\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" style=\"stroke:var(--crease)\"/></g></svg>",
+ "3:choc": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5.5\" y=\"3.5\" width=\"13\" height=\"17\" rx=\"1.5\"/><path d=\"M5.5 9.2h13M5.5 14.8h13M12 3.5v17\"/></svg>",
+ "3:fruit": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"16.5\" r=\"3.5\"/><circle cx=\"16\" cy=\"17.5\" r=\"3.5\"/><path d=\"M8 13c1-4 3-7 6-9.5M16 14c-.5-4-1-7-2-10.5\"/><path d=\"M14 3.5c2-1 4.5-.5 5.5 1.5-2 1-4.5.5-5.5-1.5z\"/></svg>",
+ "3:tobacco": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 19C5 10 10 5 19 5c0 9-5 14-14 14z\"/><path d=\"M5 19 15 9M8.5 15.5h3.5M11.5 12.5V9\"/></svg>",
+ "3:neutral": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M9.6 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.8v.6\"/><circle cx=\"12\" cy=\"16.7\" r=\".7\" fill=\"currentColor\" stroke=\"none\"/></svg>",
+ "4:love": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(-2 1)\"><path d=\"M12 3.5c3 4 6 7.3 6 10.5a6 6 0 0 1-12 0c0-3.2 3-6.5 6-10.5z\"/></g><path d=\"M18.5 2.5v4M16.5 4.5h4\"/><path d=\"M20.5 9.5v2M19.5 10.5h2\"/></svg>",
+ "4:neutral": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5c3 4 6 7.3 6 10.5a6 6 0 0 1-12 0c0-3.2 3-6.5 6-10.5z\"/></svg>",
+ "4:hate": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5c3 4 6 7.3 6 10.5a6 6 0 0 1-12 0c0-3.2 3-6.5 6-10.5z\"/><path d=\"M4.5 4.5l15 15\"/></svg>",
+ "5:black": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 9h12v3.5a5.5 5.5 0 0 1-5.5 5.5h-1A5.5 5.5 0 0 1 5 12.5z\" fill=\"currentColor\"/><path d=\"M17 10.5h1.2a2 2 0 0 1 0 4H17\"/><path d=\"M3.5 20.5h15\"/></svg>",
+ "5:milk": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9.5 3h5v3l2 3.5V20a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1V9.5l2-3.5z\"/><path d=\"M9.5 6h5\"/><path d=\"M7.5 13h9\"/></svg>",
+ "5:both": "<svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2.5 10h7.5v3a3.75 3.75 0 0 1-7.5 0z\" fill=\"currentColor\"/><path d=\"M10 11h.8a1.4 1.4 0 0 1 0 2.8H10\"/><path d=\"M13 10h7.5v3a3.75 3.75 0 0 1-7.5 0z\"/><path d=\"M13 10c1.2-1.8 6.3-1.8 7.5 0\"/><path d=\"M20.5 11h.8a1.4 1.4 0 0 1 0 2.8h-.8\"/><path d=\"M1.5 19.5h21\"/></svg>"
+};
 
 function pickAnswer(i) {
   answers[step] = i;

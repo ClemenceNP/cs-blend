@@ -9,7 +9,7 @@ En ligne : **https://blend.caffesuiso.ch/** (GitHub Pages, branche `main`, racin
 |---|---|
 | `index.html` | Le quiz (page autonome, 4 langues) |
 | `fonts/` | Polices Caffè Suiso hébergées ici : Recife Text (licence web Luzi Type) et Mattone (licence SIL OFL, voir `fonts/OFL-Mattone.txt`) |
-| `logo.png` | Logo Caffè Suiso (version verticale) de la page d'accueil |
+| `logo.png`, `logo-horizontal.png` | Logo de la page d'accueil : vertical sur téléphone, horizontal sur ordinateur (768 px et plus) |
 | `og-image.png` | Image d'aperçu 1200×630 (WhatsApp, e-mail, réseaux) |
 | `favicon.svg`, `favicon.ico`, `apple-touch-icon.png` | Icônes |
 | `CNAME` | Domaine personnalisé GitHub Pages |
