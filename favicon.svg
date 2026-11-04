@@ -1,7 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#1C0F0A"/>
-  <g transform="rotate(-28 32 32)">
-    <ellipse cx="32" cy="32" rx="16" ry="22" fill="#C9954A"/>
-    <path d="M32 12 Q40 32 32 52" stroke="#1C0F0A" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+  <rect width="64" height="64" rx="14" fill="#F5EDD8"/>
+  <g transform="rotate(-30 32 32)">
+    <clipPath id="b"><ellipse cx="32" cy="32" rx="25" ry="17"/></clipPath>
+    <g clip-path="url(#b)">
+      <rect x="0" y="0" width="64" height="64" fill="#EC6A2C"/>
+      <path d="M5 34 C16 21 26 45 36 32 S52 22 60 29 L58 64 L8 64 Z" fill="#A42516"/>
+    </g>
+    <ellipse cx="32" cy="32" rx="25" ry="17" fill="none" stroke="#1C0F0A" stroke-width="3.2"/>
+    <path d="M8 34 C17 21 26 45 36 32 S51 23 56 28" fill="none" stroke="#1C0F0A" stroke-width="3.2" stroke-linecap="round"/>
   </g>
 </svg>
