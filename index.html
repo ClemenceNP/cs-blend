@@ -449,6 +449,40 @@
   .restart:hover { color: var(--roast); }
 
   /* ── RESPONSIVE ── */
+  /* Computer (1024 px and more): wider, airier column; answers on one or two rows; result cards side by side */
+  @media (min-width: 1024px) {
+    .app { max-width: 880px; padding: 0 2rem; }
+    #intro { padding: 4rem 0; }
+    .hero-title { font-size: 72px; }
+    .hero-sub { font-size: 15px; }
+    .pill { font-size: 11px; padding: 8px 16px; }
+    .lang-btn { font-size: 12px; padding: 7px 15px; }
+    .btn-cta { font-size: 12px; padding: 18px 56px; }
+
+    .quiz-topbar { padding: 2.5rem 0 1.5rem; }
+    .question-wrap { padding: 1rem 0 3rem; }
+    .q-text { font-size: 38px; margin-bottom: 0.6rem; }
+    .q-hint { font-size: 14px; margin-bottom: 2.25rem; }
+    .options { gap: 14px; }
+    .options:has(> .opt-card:nth-child(6)) { grid-template-columns: repeat(3, 1fr) !important; }
+    .options:has(> .opt-card:nth-child(4):last-child) { grid-template-columns: repeat(4, 1fr); }
+    .options:has(> .opt-card:nth-child(3):last-child) { grid-template-columns: repeat(3, 1fr); }
+    .options:has(> .opt-card:nth-child(3):last-child) .opt-card.full { grid-column: auto; }
+    .opt-card { padding: 1.4rem 1.2rem; }
+    .opt-label { font-size: 15px; }
+    .opt-desc { font-size: 13px; }
+
+    #naming, #result { padding: 3rem 0 4rem; }
+    .name-title { font-size: 48px; }
+    .name-sub { font-size: 15px; }
+    #result.active {
+      display: grid; grid-template-columns: 1fr 1fr;
+      column-gap: 14px; align-items: start; align-content: start;
+    }
+    #result.active > * { grid-column: 1 / -1; }
+    #result.active > .result-card { grid-column: auto; align-self: stretch; }
+    .result-name { font-size: 60px; }
+  }
   @media (max-width: 380px) {
     .options { grid-template-columns: 1fr; }
     .opt-card.full { grid-column: 1; }
