@@ -542,7 +542,7 @@
   <div id="naming" class="screen">
     <p class="name-brand">Caffè Suiso</p>
     <h2 class="name-title" id="name-title">Dai un nome<br>alla tua miscela.</h2>
-    <p class="name-sub" id="name-sub">Questa miscela è tua. Dagli un nome che significhi qualcosa.</p>
+    <p class="name-sub" id="name-sub">Questa miscela è tua. Dalle un nome che significhi qualcosa.</p>
 
     <input type="text" class="name-input" id="name-input"
       placeholder="es. Alba di novembre, Ricordo di nonna…"
@@ -569,13 +569,13 @@
       </button>
     </div>
 
-    <button class="btn-cta" style="width:100%" id="reveal-btn" onclick="buildResult()">Scopri il tuo blend →</button>
+    <button class="btn-cta" style="width:100%" id="reveal-btn" onclick="buildResult()">Scopri la tua miscela →</button>
   </div>
 
   <!-- ═══════════════ RESULT ═══════════════ -->
   <div id="result" class="screen">
     <div class="result-top">
-      <div class="result-eyebrow" id="r-eyebrow">Una miscela personale di</div>
+      <div class="result-eyebrow" id="r-eyebrow">La tua miscela personale</div>
       <div class="result-name" id="r-name">—</div>
       <div class="result-ref" id="r-ref"></div>
       <div class="result-tag" id="r-tag">Tostato su ordinazione · Caffè Suiso</div>
@@ -606,8 +606,8 @@
     <div class="gift-row" id="gift-row" onclick="toggleGift()">
       <div class="gift-icon-wrap">◇</div>
       <div>
-        <div class="gift-text" id="r-gift">Offri questo blend in regalo</div>
-        <div class="gift-sub" id="r-gift-sub">Invialo a qualcuno di speciale, tostato fresco.</div>
+        <div class="gift-text" id="r-gift">Offri questa miscela in regalo</div>
+        <div class="gift-sub" id="r-gift-sub">Inviala a qualcuno di speciale, tostata fresca.</div>
       </div>
     </div>
 
@@ -615,7 +615,7 @@
       <button class="btn-order" id="r-order" onclick="orderBlend()">Aggiungi al carrello</button>
       <button class="btn-share" id="r-share" onclick="shareBlend()">Condividi</button>
     </div>
-    <div class="restart" id="r-restart" onclick="restart()">Ricominciare</div>
+    <div class="restart" id="r-restart" onclick="restart()">Ricomincia</div>
   </div>
 
 </div><!-- .app -->
@@ -653,7 +653,7 @@ const LANGS = {
       {
         label: 'Domanda 3', text: 'Sei sensibile alla caffeina?', hint: 'Per calibrare il contenuto',
         opts: [
-          { l: 'No, più caffè', d: 'Caffeina piena, nessun problema', v: 'no' },
+          { l: 'No, più caffeina', d: 'Caffeina piena, nessun problema', v: 'no' },
           { l: 'Un poco', d: 'Preferisco moderarla', v: 'some' },
           { l: 'Sì, la evito', d: 'Voglio meno caffeina possibile', v: 'yes' },
         ]
@@ -670,7 +670,7 @@ const LANGS = {
       {
         label: 'Domanda 5', text: 'Come percepisci l\'acidità?', hint: 'La tua tolleranza',
         opts: [
-          { l: 'La adoro', d: 'Vivacità e brillantezza', v: 'love' },
+          { l: 'L\'adoro', d: 'Vivacità e brillantezza', v: 'love' },
           { l: 'Neutra', d: 'Non mi disturba', v: 'neutral' },
           { l: 'La detesto', d: 'Voglio dolcezza, zero acidità', v: 'hate' },
         ]
@@ -685,23 +685,23 @@ const LANGS = {
       }
     ],
     nameTitle: 'Dai un nome\nalla tua miscela.',
-    nameSub: 'Questa miscela è tua. Dagli un nome che significhi qualcosa.',
+    nameSub: 'Questa miscela è tua. Dalle un nome che significhi qualcosa.',
     namePlaceholder: 'es. Alba di novembre, Ricordo di nonna…',
     weightLabel: 'Scegli la quantità',
     weightHints: ['Assaggio', 'Classico', 'Appassionato'],
-    revealBtn: 'Scopri il tuo blend →',
-    rEyebrow: 'Una miscela personale di',
+    revealBtn: 'Scopri la tua miscela →',
+    rEyebrow: 'La tua miscela personale',
     rTag: 'Tostato su ordinazione · Caffè Suiso',
     rComp: 'Composizione',
     rProfile: 'Profilo aromatico',
     rRoast: 'Tostatura',
     roastLevels: ['Chiara', 'Medio-chiara', 'Media', 'Medio-scura', 'Scura'],
     roastEnds: ['Chiara', 'Media', 'Scura'],
-    rGift: 'Offri questo blend in regalo',
-    rGiftSub: 'Invialo a qualcuno di speciale, tostato fresco.',
+    rGift: 'Offri questa miscela in regalo',
+    rGiftSub: 'Inviala a qualcuno di speciale, tostata fresca.',
     rOrder: 'Aggiungi al carrello',
     rShare: 'Condividi',
-    rRestart: 'Ricominciare',
+    rRestart: 'Ricomincia',
     origins: { br: 'Brasile Arabica', co: 'Colombia Arabica', ind: 'India Arabica', inr: 'India Robusta', dec: 'Brasile Decaf' }
   },
   en: {
@@ -769,7 +769,7 @@ const LANGS = {
     weightLabel: 'Choose your quantity',
     weightHints: ['Taster', 'Classic', 'Devotee'],
     revealBtn: 'Reveal my blend →',
-    rEyebrow: 'A personal blend by',
+    rEyebrow: 'Your personal blend',
     rTag: 'Roasted to order · Caffè Suiso',
     rComp: 'Composition',
     rProfile: 'Flavour profile',
@@ -848,7 +848,7 @@ const LANGS = {
     weightLabel: 'Choisissez votre quantité',
     weightHints: ['Découverte', 'Classique', 'Amateur'],
     revealBtn: 'Révéler mon blend →',
-    rEyebrow: 'Un blend personnel de',
+    rEyebrow: 'Votre blend personnel',
     rTag: 'Torréfié à la commande · Caffè Suiso',
     rComp: 'Composition',
     rProfile: 'Profil aromatique',
@@ -927,7 +927,7 @@ const LANGS = {
     weightLabel: 'Menge wählen',
     weightHints: ['Kostprobe', 'Klassisch', 'Liebhaber'],
     revealBtn: 'Meinen Blend enthüllen →',
-    rEyebrow: 'Ein persönlicher Blend von',
+    rEyebrow: 'Dein persönlicher Blend',
     rTag: 'Frisch geröstet auf Bestellung · Caffè Suiso',
     rComp: 'Zusammensetzung',
     rProfile: 'Aromaprofil',
@@ -1075,36 +1075,36 @@ function getFlavours(ans, blend, lang) {
 
   const T = {
     it: {
-      espresso:['corpo espresso','crema densa'], moka:['corpo moka','rotondità'], auto:['bilanciato','vellutato'],
-      filter:['chiarezza','leggerezza'], french:['struttura','immersione'], cold:['dolcezza fredda','morbidezza'],
+      espresso:['corpo espresso','crema densa'], moka:['corpo','rotondità'], auto:['bilanciato','vellutato'],
+      filter:['chiarezza','leggerezza'], french:['struttura','pienezza'], cold:['dolcezza fredda','morbidezza'],
       light:['delicatezza','leggerezza'], balanced:['armonia','equilibrio'], bold:['corpo pieno','profondità'], intense:['potenza','carattere'],
       choc:['cioccolato','nocciola','caramello'], fruit:['note fruttate','floreale'], tobacco:['tabacco','tostato','terroso'],
       love:['vivacità','brillantezza'], hate:['dolcezza','rotondità'],
-      ind:['corpo India','neutralità acida'], inr:['robustezza','intensità']
+      ind:['corpo morbido','bassa acidità'], inr:['robustezza','intensità']
     },
     en: {
-      espresso:['espresso body','dense crema'], moka:['moka body','roundness'], auto:['balanced','velvety'],
-      filter:['clarity','lightness'], french:['structure','immersion'], cold:['cold sweetness','smoothness'],
+      espresso:['espresso body','dense crema'], moka:['body','roundness'], auto:['balanced','velvety'],
+      filter:['clarity','lightness'], french:['structure','fullness'], cold:['cold sweetness','smoothness'],
       light:['delicacy','lightness'], balanced:['harmony','balance'], bold:['full body','depth'], intense:['power','character'],
       choc:['chocolate','hazelnut','caramel'], fruit:['fruity notes','floral'], tobacco:['tobacco','roasted','earthy'],
       love:['vibrancy','brightness'], hate:['sweetness','roundness'],
-      ind:['India body','low acidity'], inr:['robustness','intensity']
+      ind:['smooth body','low acidity'], inr:['robustness','intensity']
     },
     fr: {
-      espresso:['corps espresso','crème dense'], moka:['corps moka','rondeur'], auto:['équilibré','velouté'],
-      filter:['clarté','légèreté'], french:['structure','immersion'], cold:['douceur froide','onctuosité'],
+      espresso:['corps espresso','crème dense'], moka:['corps','rondeur'], auto:['équilibré','velouté'],
+      filter:['clarté','légèreté'], french:['structure','plénitude'], cold:['douceur froide','onctuosité'],
       light:['délicatesse','légèreté'], balanced:['harmonie','équilibre'], bold:['plein corps','profondeur'], intense:['puissance','caractère'],
       choc:['chocolat','noisette','caramel'], fruit:['notes fruitées','floral'], tobacco:['tabac','torréfié','terreux'],
       love:['vivacité','brillance'], hate:['douceur','rondeur'],
-      ind:['corps Inde','acidité neutre'], inr:['robustesse','intensité']
+      ind:['corps doux','faible acidité'], inr:['robustesse','intensité']
     },
     de: {
-      espresso:['Espressokörper','dichte Crema'], moka:['Mokakörper','Rundheit'], auto:['ausgewogen','samtig'],
-      filter:['Klarheit','Leichtigkeit'], french:['Struktur','Immersion'], cold:['kalte Süße','Weichheit'],
+      espresso:['Espressokörper','dichte Crema'], moka:['Körper','Rundheit'], auto:['ausgewogen','samtig'],
+      filter:['Klarheit','Leichtigkeit'], french:['Struktur','Fülle'], cold:['kalte Süße','Weichheit'],
       light:['Zartheit','Leichtigkeit'], balanced:['Harmonie','Balance'], bold:['vollmundig','Tiefe'], intense:['Kraft','Charakter'],
       choc:['Schokolade','Haselnuss','Karamell'], fruit:['Fruchtnoten','blumig'], tobacco:['Tabak','geröstet','erdig'],
       love:['Lebendigkeit','Helligkeit'], hate:['Süße','Rundheit'],
-      ind:['Indien Körper','geringe Säure'], inr:['Robustheit','Intensität']
+      ind:['sanfter Körper','geringe Säure'], inr:['Robustheit','Intensität']
     }
   };
   const tl = T[lang] || T.it;
