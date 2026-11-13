@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Build Your Blend — Caffè Suiso</title>
+<title>Build Your Blend · Caffè Suiso</title>
 <meta name="description" content="Sei domande. Cinque origini. Una miscela interamente tua, tostata su ordinazione da Caffè Suiso.">
 <link rel="canonical" href="https://blend.caffesuiso.ch/">
 
@@ -16,22 +16,22 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffè Suiso">
 <meta property="og:url" content="https://blend.caffesuiso.ch/">
-<meta property="og:title" content="Build Your Blend — Caffè Suiso">
+<meta property="og:title" content="Build Your Blend · Caffè Suiso">
 <meta property="og:description" content="Sei domande. Cinque origini. Una miscela interamente tua, tostata su ordinazione da Caffè Suiso.">
 <meta property="og:image" content="https://blend.caffesuiso.ch/og-image.png?v=2">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Caffè Suiso — Crea il tuo blend personale: Brasile, Colombia, India, India Robusta, Decaf.">
+<meta property="og:image:alt" content="Caffè Suiso: crea il tuo blend personale con Brasile, Colombia, India, India Robusta e Decaf.">
 <meta property="og:locale" content="it_CH">
 <meta property="og:locale:alternate" content="fr_CH">
 <meta property="og:locale:alternate" content="de_CH">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Build Your Blend — Caffè Suiso">
+<meta name="twitter:title" content="Build Your Blend · Caffè Suiso">
 <meta name="twitter:description" content="Sei domande. Cinque origini. Una miscela interamente tua, tostata su ordinazione da Caffè Suiso.">
 <meta name="twitter:image" content="https://blend.caffesuiso.ch/og-image.png?v=2">
-<meta name="twitter:image:alt" content="Caffè Suiso — Crea il tuo blend personale: Brasile, Colombia, India, India Robusta, Decaf.">
+<meta name="twitter:image:alt" content="Caffè Suiso: crea il tuo blend personale con Brasile, Colombia, India, India Robusta e Decaf.">
 
 <!-- Fonts: Recife Text (texts) & Mattone (names, labels, buttons), self-hosted -->
 <link rel="preload" href="fonts/recife-text-light.woff2" as="font" type="font/woff2" crossorigin>
@@ -576,7 +576,7 @@
   <div id="result" class="screen">
     <div class="result-top">
       <div class="result-eyebrow" id="r-eyebrow">La tua miscela personale</div>
-      <div class="result-name" id="r-name">—</div>
+      <div class="result-name" id="r-name"></div>
       <div class="result-ref" id="r-ref"></div>
       <div class="result-tag" id="r-tag">Tostato su ordinazione · Caffè Suiso</div>
     </div>
@@ -1241,7 +1241,7 @@ function orderBlend() {
 }
 
 async function shareBlend() {
-  const text = `${lastName} — ${compositionString(lastBlend)} · Caffè Suiso`;
+  const text = `${lastName}: ${compositionString(lastBlend)} · Caffè Suiso`;
   const url = location.href.split('#')[0];
   try {
     if (navigator.share) {
